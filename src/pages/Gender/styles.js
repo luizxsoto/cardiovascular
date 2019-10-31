@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import imageBackground from '~/assets/images/mesaMedico.jpg';
+import gender from '~/assets/images/gender.png';
 
 export const Container = styled.ImageBackground.attrs({
   imageStyle: { opacity: 0.1 },
@@ -8,9 +9,17 @@ export const Container = styled.ImageBackground.attrs({
 })`
   flex: 1;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 20px;
   background: #eee;
+`;
+
+export const QuestionImage = styled.Image.attrs({
+  source: gender,
+})`
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10%;
 `;
 
 export const QuestionText = styled.Text`
@@ -24,49 +33,40 @@ export const QuestionText = styled.Text`
   text-align: center;
   text-align-vertical: center;
   border-radius: 5px;
+  margin-bottom: 10%;
 `;
 
-export const Picker = styled.View`
-  width: 100%;
-  height: 50px;
+export const Panel = styled.View`
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-`;
-
-export const PickerInput = styled.TextInput`
-  width: 23%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  text-align-vertical: center;
-  font-size: 28px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
-  color: #f95f62;
-  font-weight: bold;
-`;
-
-export const CalendarButton = styled(RectButton).attrs({})`
-  align-items: center;
-  justify-content: center;
-  width: 15%;
-  height: 100%;
-`;
-
-export const SendButton = styled(RectButton).attrs({})`
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 70px;
-  background: rgba(0, 0, 0, 0.1);
+  width: 90%;
+  height: 100px;
+  padding: 0 20px;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
 `;
 
-export const SendText = styled.Text`
-  width: 100%;
-  font-size: 28px;
-  color: #f95f62;
+export const PanelBtn = styled(RectButton).attrs({})`
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  height: 70%;
+  margin: 10px;
+  background: ${props =>
+    props.checked ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.2)'};
+  border-radius: 10px;
+`;
+
+export const PanelImage = styled.Image`
+  width: 30px;
+  height: 30px;
+`;
+
+export const PanelText = styled.Text`
+  font-size: 20px;
   font-weight: bold;
+  color: #f95f62;
   text-align: center;
 `;
