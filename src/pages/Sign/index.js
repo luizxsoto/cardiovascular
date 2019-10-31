@@ -2,28 +2,45 @@ import React from 'react';
 
 import {
   Container,
-  Logo,
+  Panel,
+  Label,
+  Input,
   LogoImage,
   LogoText,
   SignBtn,
   SignBtnText,
 } from './styles';
 
-export default function Sign() {
+export default function Sign({ navigation }) {
+  function handleSignIn() {
+    navigation.navigate('Gender');
+    // navigation.navigate('SignIn');
+  }
+
+  function handleSignUp() {
+    // navigation.navigate('SignUp');
+  }
+
   return (
     <Container>
-      <Logo>
+      <Panel>
         <LogoImage />
         <LogoText>Higia</LogoText>
-      </Logo>
-      <Logo>
-        <SignBtn>
+      </Panel>
+      <Panel pos>
+        <Label>Usuario</Label>
+        <Input />
+        <Label>Senha</Label>
+        <Input secureTextEntry />
+      </Panel>
+      <Panel>
+        <SignBtn onPress={handleSignIn}>
           <SignBtnText>Entrar</SignBtnText>
         </SignBtn>
-        <SignBtn background="#fff">
+        <SignBtn background="#fff" onPress={handleSignUp}>
           <SignBtnText color="rgba(255, 0, 0, 0.7)">Cadastrar</SignBtnText>
         </SignBtn>
-      </Logo>
+      </Panel>
     </Container>
   );
 }

@@ -13,22 +13,22 @@ import {
   SendText,
 } from './styles';
 
-export default function Height({ navigation }) {
+export default function Weight({ navigation }) {
   const dispatch = useDispatch();
-  const [heightInput, setHeightInput] = useState();
+  const [weightInput, setWeightInput] = useState();
 
-  function onChangeHeight(text) {
+  function onChangeWeight(text) {
     if (parseInt(text, 10) <= 250 && text) {
-      setHeightInput(text.replace(/[^0-9]/g, ''));
+      setWeightInput(text.replace(/[^0-9]/g, ''));
     } else {
-      setHeightInput('');
+      setWeightInput('');
     }
   }
 
   function handleSubmit() {
-    if (heightInput >= 100) {
-      dispatch(UserCreators.changeHeight(heightInput));
-      navigation.navigate('Weight');
+    if (weightInput >= 40) {
+      dispatch(UserCreators.changeWeight(weightInput));
+      navigation.navigate('SmokeAlcoActive');
     } else {
       Alert.alert(
         'Altura invalida',
@@ -44,12 +44,12 @@ export default function Height({ navigation }) {
   return (
     <Container>
       <QuestionImage />
-      <QuestionText>Sua altura é:</QuestionText>
+      <QuestionText>Seu peso é:</QuestionText>
       <Panel>
         <PanelInput
-          placeholder="Em centimetros"
-          value={heightInput}
-          onChangeText={onChangeHeight}
+          placeholder="Em kilos"
+          value={weightInput}
+          onChangeText={onChangeWeight}
         />
       </Panel>
       <SendButton onPress={() => handleSubmit()}>
@@ -59,6 +59,6 @@ export default function Height({ navigation }) {
   );
 }
 
-Height.navigationOptions = {
+Weight.navigationOptions = {
   title: 'Sobre você',
 };

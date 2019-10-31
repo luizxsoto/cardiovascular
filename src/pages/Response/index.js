@@ -4,10 +4,22 @@ import { useSelector } from 'react-redux';
 
 import { apiApp } from '~/services/api';
 
-import { Container, Text } from './styles';
+import {
+  Container,
+  ScoreTitle,
+  ScorePanel,
+  ScorePoints,
+  ScoreLabel,
+  ScoreMessageTitle,
+  ScoreMessage,
+  AdviceMessage,
+  BetterScorePanel,
+  BetterScorePoints,
+  BetterScoreLabel,
+} from './styles';
 
 export default function Response() {
-  const [resp, setResp] = useState({ prediction: '', probability: [[]] });
+  const [score, setScore] = useState(0);
   const age = useSelector(state => state.user.age);
   const gender = useSelector(state => state.user.gender);
   const height = useSelector(state => state.user.height);
@@ -20,44 +32,116 @@ export default function Response() {
   const alco = useSelector(state => state.user.alco);
   const active = useSelector(state => state.user.active);
 
-  async function handleSend() {
-    await apiApp
-      .post('/predict', {
-        features: [
-          age * 365,
-          gender,
-          height,
-          weight,
-          systolic,
-          diastolic,
-          cholesterol,
-          gluc,
-          smoke,
-          alco,
-          active,
-        ],
-      })
-      .then(res => setResp(res.data))
-      .catch(err => Alert.alert('Erro', `${err}`));
-  }
+  const messages = [
+    {
+      title: 'Meus parabéns!',
+      message:
+        'Sua saúde cardiovascular é excelente. Você possui bons hábitos e é fundamental mantê-los.',
+    },
+    {
+      title: 'Opa!',
+      message:
+        'Você está no caminho certo para a saúde cardiovascular. Entretanto você poderia melhorar alguns hábitos.',
+    },
+    {
+      title: 'Ops!',
+      message:
+        'Apesar de possuir bons hábitos, você precisar melhorar e cuidar de sua saúde cardiovascular.',
+    },
+    {
+      title: 'Hmm!',
+      message:
+        'Você possui tendência a ter problemas cardíacos. Por isso, é importante rever seus hábitos e realizar um check up médico.',
+    },
+    {
+      title: 'Ixi!',
+      message:
+        'Você possui alto risco de desenvolver problemas cardíacos. Realize um check up médico assim que possível.',
+    },
+  ];
 
   useEffect(() => {
-    handleSend();
+    async function callApi() {
+      await apiApp
+        .post('/predict', {
+          features: [
+            age,
+            gender,
+            height,
+            weight,
+            systolic,
+            diastolic,
+            cholesterol,
+            gluc,
+            smoke,
+            alco,
+            active,
+          ],
+        })
+        .then(res => setScore(parseInt(res.data.probability[0][0] * 100, 10)))
+        .catch(err => Alert.alert('Erro', `${err}`));
+    }
+
+    callApi();
   }, []);
+
+  function renderTitle() {
+    if (score >= 81) {
+      return messages[0].title;
+    }
+    if (score >= 61 && score <= 80) {
+      return messages[1].title;
+    }
+    if (score >= 41 && score <= 60) {
+      return messages[2].title;
+    }
+    if (score >= 21 && score <= 40) {
+      return messages[3].title;
+    }
+    if (score >= 1 && score <= 20) {
+      return messages[4].title;
+    }
+    return 'Carregando...';
+  }
+
+  function renderMessage() {
+    if (score >= 81) {
+      return messages[0].message;
+    }
+    if (score >= 61 && score <= 80) {
+      return messages[1].message;
+    }
+    if (score >= 41 && score <= 60) {
+      return messages[2].message;
+    }
+    if (score >= 21 && score <= 40) {
+      return messages[3].message;
+    }
+    if (score >= 1 && score <= 20) {
+      return messages[4].message;
+    }
+    return 'Carregando...';
+  }
 
   return (
     <Container>
-      <Text>
-        Responses: {age},{gender},{height},{weight},{systolic},{diastolic},
-        {cholesterol},{gluc},{smoke},{alco},{active}
-      </Text>
-      <Text>Prediction: {resp.prediction}</Text>
-      <Text>Probability to 0: {resp.probability[0][0]}</Text>
-      <Text>Probability to 1: {resp.probability[0][1]}</Text>
+      <ScoreTitle>Seu score é:</ScoreTitle>
+      <ScorePanel>
+        <ScorePoints>{score}</ScorePoints>
+        <ScoreLabel>pts</ScoreLabel>
+      </ScorePanel>
+      <ScoreMessageTitle>{renderTitle()}</ScoreMessageTitle>
+      <ScoreMessage>{renderMessage()}</ScoreMessage>
+      <AdviceMessage>Algo está atrapalhando seu score!</AdviceMessage>
+      <AdviceMessage>Se você o evitasse, seu score seria de:</AdviceMessage>
+      <BetterScorePanel>
+        <BetterScorePoints>100</BetterScorePoints>
+        <BetterScoreLabel>pts</BetterScoreLabel>
+      </BetterScorePanel>
     </Container>
   );
 }
 
 Response.navigationOptions = {
-  title: 'Resposta',
+  title: 'Seu resultado',
 };

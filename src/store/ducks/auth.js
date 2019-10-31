@@ -21,7 +21,8 @@ const INITIAL_STATE = {
 /* Reducers handlers */
 const signInRequest = (state = INITIAL_STATE) =>
   produce(state, draft => {
-    draft.loading = true;
+    // draft.loading = true;
+    draft.signed = true;
   });
 
 const signInSuccess = (state = INITIAL_STATE, action) =>

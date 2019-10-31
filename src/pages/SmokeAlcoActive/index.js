@@ -9,13 +9,12 @@ import bebe from '~/assets/images/bebe.png';
 import naoBebe from '~/assets/images/naoBebe.png';
 import maoSim from '~/assets/images/maoSim.png';
 import maoNao from '~/assets/images/maoNao.png';
-import image from '~/assets/images/mesaMedico.jpg';
 import {
   Container,
   Panel,
-  ResponseBtn,
-  ResponseImage,
-  ResponseText,
+  PanelBtn,
+  PanelImage,
+  PanelText,
   SendButton,
   SendText,
 } from './styles';
@@ -36,38 +35,38 @@ export default function SmokeAlcoActive({ navigation }) {
       dispatch(UserCreators.changeSmoke(smoke));
       dispatch(UserCreators.changeAlco(alco));
       dispatch(UserCreators.changeActive(active));
-      navigation.navigate('Response');
+      navigation.navigate('Cholesterol');
     }
   }
 
   return (
-    <Container source={image}>
+    <Container>
       <Panel>
-        <ResponseBtn onPress={() => setSmoke(1)}>
-          <ResponseImage source={fuma} />
-        </ResponseBtn>
-        <ResponseText>OU</ResponseText>
-        <ResponseBtn onPress={() => setSmoke(0)}>
-          <ResponseImage source={naoFuma} />
-        </ResponseBtn>
+        <PanelBtn checked={smoke === 1} onPress={() => setSmoke(1)}>
+          <PanelImage source={fuma} />
+        </PanelBtn>
+        <PanelText>OU</PanelText>
+        <PanelBtn checked={smoke === 0} onPress={() => setSmoke(0)}>
+          <PanelImage source={naoFuma} />
+        </PanelBtn>
       </Panel>
       <Panel>
-        <ResponseBtn onPress={() => setAlco(1)}>
-          <ResponseImage source={bebe} />
-        </ResponseBtn>
-        <ResponseText>OU</ResponseText>
-        <ResponseBtn onPress={() => setAlco(0)}>
-          <ResponseImage source={naoBebe} />
-        </ResponseBtn>
+        <PanelBtn checked={alco === 1} onPress={() => setAlco(1)}>
+          <PanelImage source={bebe} />
+        </PanelBtn>
+        <PanelText>OU</PanelText>
+        <PanelBtn checked={alco === 0} onPress={() => setAlco(0)}>
+          <PanelImage source={naoBebe} />
+        </PanelBtn>
       </Panel>
       <Panel>
-        <ResponseBtn onPress={() => setActive(1)}>
-          <ResponseImage source={maoSim} />
-        </ResponseBtn>
-        <ResponseText>SE EXERCITA?</ResponseText>
-        <ResponseBtn onPress={() => setActive(0)}>
-          <ResponseImage source={maoNao} />
-        </ResponseBtn>
+        <PanelBtn checked={active === 1} onPress={() => setActive(1)}>
+          <PanelImage source={maoSim} />
+        </PanelBtn>
+        <PanelText>SE EXERCITA?</PanelText>
+        <PanelBtn checked={active === 0} onPress={() => setActive(0)}>
+          <PanelImage source={maoNao} />
+        </PanelBtn>
       </Panel>
       <SendButton onPress={() => handleSubmit()}>
         <SendText>Próximo</SendText>
@@ -77,5 +76,5 @@ export default function SmokeAlcoActive({ navigation }) {
 }
 
 SmokeAlcoActive.navigationOptions = {
-  title: 'Fuma/Bebe/Ativo',
+  title: 'Sobre seus hábitos',
 };

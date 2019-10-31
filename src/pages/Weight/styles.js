@@ -1,8 +1,12 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import imageBackground from '~/assets/images/mesaMedico.jpg';
+import weight from '~/assets/images/weight.png';
 
 export const Container = styled.ImageBackground.attrs({
-  imageStyle: { opacity: 0.3 },
+  imageStyle: { opacity: 0.1 },
+  source: imageBackground,
+  blurRadius: 0.5,
 })`
   flex: 1;
   align-items: center;
@@ -11,53 +15,50 @@ export const Container = styled.ImageBackground.attrs({
   background: #eee;
 `;
 
+export const QuestionImage = styled.Image.attrs({
+  source: weight,
+})`
+  width: 150px;
+  height: 150px;
+`;
+
+export const QuestionText = styled.Text`
+  width: 90%;
+  height: 70px;
+  text-align: center;
+  font-size: 28px;
+  color: #f95f62;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.1);
+  text-align: center;
+  text-align-vertical: center;
+  margin: 20px 0;
+  border-radius: 10px;
+`;
+
 export const Panel = styled.View`
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 80%;
-  height: 100px;
-  margin: 10px 0;
+  justify-content: center;
+  width: 90%;
+  height: 70px;
   padding: 0 20px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
 `;
 
-export const GenderBtn = styled(RectButton).attrs({})`
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-  height: 70%;
-  margin: 10px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-`;
-
-export const GenderImage = styled.Image`
-  width: 30px;
-  height: 30px;
-`;
-
-export const GenderText = styled.Text`
-  font-size: 20px;
-  color: ${props => (props.color ? '#000' : '#fff')};
-  text-align: center;
-  max-width: 50%;
-`;
-
-export const Input = styled.TextInput.attrs({
+export const PanelInput = styled.TextInput.attrs({
   keyboardType: 'numeric',
   placeholderTextColor: '#eee',
 })`
   text-align: center;
   width: 100%;
-  height: 50%;
+  height: 50px;
   background: rgba(0, 0, 0, 0.2);
   color: #fff;
   border-radius: 5px;
-  font-size: 25px;
+  font-size: 32px;
   padding: 0;
+  margin: 0;
   font-family: Calculator;
 `;
 
@@ -65,14 +66,15 @@ export const SendButton = styled(RectButton).attrs({})`
   align-items: center;
   justify-content: center;
   width: 200px;
-  height: 70px;
+  height: 60px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  margin-top: 20px;
 `;
 
 export const SendText = styled.Text`
-  width: 100%;
   font-size: 28px;
-  color: #fff;
+  font-weight: bold;
+  color: #f95f62;
   text-align: center;
 `;

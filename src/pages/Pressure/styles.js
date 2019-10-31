@@ -1,8 +1,11 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import imageBackground from '~/assets/images/mesaMedico.jpg';
 
 export const Container = styled.ImageBackground.attrs({
-  imageStyle: { opacity: 0.3 },
+  imageStyle: { opacity: 0.1 },
+  source: imageBackground,
+  blurRadius: 0.5,
 })`
   flex: 1;
   align-items: center;

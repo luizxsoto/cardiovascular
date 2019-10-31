@@ -1,0 +1,21 @@
+Mensagens de resultado, de acordo com o score:
+{
+  title: 'Meus parabéns!'
+  message: 'Sua saúde cardiovascular é excelente. Você possui bons hábitos e é fundamental mantê-los.'
+},
+{
+  title: 'Opa!'
+  message: 'Você está no caminho certo para a saúde cardiovascular. Entretanto você poderia melhorar alguns hábitos.'
+},
+{
+  title: 'Ops!'
+  message: 'Apesar de possuir bons hábitos, você precisar melhorar e cuidar de sua saúde cardiovascular.'
+},
+{
+  title: 'Hmm!'
+  message: 'Você possui tendência a ter problemas cardíacos. Por isso, é importante rever seus hábitos e realizar um check up médico.'
+},
+{
+  title: 'Ixi!'
+  message: 'Você possui alto risco de desenvolver problemas cardíacos. Realize um check up médico assim que possível.'
+}

@@ -6,21 +6,41 @@ import cardiogram from '~/assets/images/cardiogram.png';
 export const Container = styled.ImageBackground.attrs({
   imageStyle: { opacity: 0.1 },
   source: image,
+  blurRadius: 0.5,
 })`
   display: flex;
   flex: 1;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  padding: 0 20px;
   padding-top: 20%;
-  padding-bottom: 10%;
   background: rgba(255, 0, 0, 0.5);
 `;
 
-export const Logo = styled.View`
+export const Panel = styled.View`
   width: 100%;
-  align-items: center;
+  align-items: ${props => (props.pos ? 'flex-start' : 'center')};
   justify-content: center;
+`;
+
+export const Label = styled.Text`
+  margin: 10px 0;
+  padding: 0 10px;
+  color: #fff;
+  font-weight: bold;
+`;
+
+export const Input = styled.TextInput.attrs({
+  autoCapitalize: 'none',
+  autoCorrect: false,
+})`
+  height: 40px;
+  width: 100%;
+  font-size: 20px;
+  padding: 0px;
+  background: rgba(0, 0, 0, 0.1);
+  border-bottom-width: 1px;
+  border-bottom-color: #f00;
 `;
 
 export const LogoImage = styled.Image.attrs({

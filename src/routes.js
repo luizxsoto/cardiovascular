@@ -3,15 +3,17 @@ import { Image } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-// import Sign from './pages/Sign';
-import Age from './pages/Age';
+import Sign from './pages/Sign/index';
+import SignIn from './pages/Sign/SignIn';
+import SignUp from './pages/Sign/SignUp';
 import Gender from './pages/Gender';
+import Age from './pages/Age';
 import Height from './pages/Height';
-import Cholesterol from './pages/Cholesterol';
-import GenderHeightWeight from './pages/GenderHeightWeight';
-import Pressure from './pages/Pressure';
-import Gluc from './pages/Gluc';
+import Weight from './pages/Weight';
 import SmokeAlcoActive from './pages/SmokeAlcoActive';
+import Cholesterol from './pages/Cholesterol';
+import Gluc from './pages/Gluc';
+import Pressure from './pages/Pressure';
 import Response from './pages/Response';
 
 import cardiogram from '~/assets/images/cardiogram.png';
@@ -20,15 +22,17 @@ export default (isSigned = false) =>
   createAppContainer(
     createStackNavigator(
       {
-        Height,
-        // Sign,
-        Age,
+        Sign,
+        SignIn,
+        SignUp,
         Gender,
-        GenderHeightWeight,
-        Pressure,
+        Age,
+        Height,
+        Weight,
+        SmokeAlcoActive,
         Cholesterol,
         Gluc,
-        SmokeAlcoActive,
+        Pressure,
         Response,
       },
       {

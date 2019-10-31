@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Creators as UserCreators } from '~/store/ducks/user';
 
-import image from '~/assets/images/mesaMedico.jpg';
 import normal from '~/assets/images/normal.png';
 import acimaNormal from '~/assets/images/acimaNormal.png';
 import bemAcimaNormal from '~/assets/images/bemAcimaNormal.png';
@@ -13,11 +12,11 @@ export default function Gluc({ navigation }) {
 
   function handleSubmit(response) {
     dispatch(UserCreators.changeGluc(response));
-    navigation.navigate('SmokeAlcoActive');
+    navigation.navigate('Pressure');
   }
 
   return (
-    <Container source={image}>
+    <Container>
       <Panel onPress={() => handleSubmit(1)}>
         <GlucImage source={normal} />
         <GlucText>Normal</GlucText>

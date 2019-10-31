@@ -7,6 +7,7 @@ import { Creators as UserCreators } from '~/store/ducks/user';
 
 import {
   Container,
+  QuestionImage,
   QuestionText,
   Picker,
   PickerInput,
@@ -21,7 +22,7 @@ export default function Age({ navigation }) {
   const [day, setDay] = useState('01');
   const [month, setMonth] = useState('01');
   const [year, setYear] = useState('2000');
-  const [targetDate, setTargetDate] = useState(new Date('2000-01-01'));
+  const [targetDate, setTargetDate] = useState(new Date('2000-01-02'));
   const [show, setShow] = useState(false);
 
   function valideDate(date, alert) {
@@ -51,6 +52,7 @@ export default function Age({ navigation }) {
     const tempDate = new Date(`${year}-${month}-${`00${day}`.slice(-2)}`);
     if (valideDate(tempDate, 1)) {
       setDay(`00${day}`.slice(-2));
+      tempDate.setDate(tempDate.getDate() + 1);
       setTargetDate(tempDate);
     } else {
       setDay(`00${targetDate.getDate()}`.slice(-2));
@@ -61,6 +63,7 @@ export default function Age({ navigation }) {
     const tempDate = new Date(`${year}-${`00${month}`.slice(-2)}-${day}`);
     if (valideDate(tempDate, 1)) {
       setMonth(`00${month}`.slice(-2));
+      tempDate.setDate(tempDate.getDate() + 1);
       setTargetDate(tempDate);
     } else {
       setMonth(`00${targetDate.getMonth() + 1}`.slice(-2));
@@ -72,6 +75,7 @@ export default function Age({ navigation }) {
       const tempDate = new Date(`${`0000${year}`.slice(-4)}-${month}-${day}`);
       if (valideDate(tempDate, 1)) {
         setYear(`0000${year}`.slice(-4));
+        tempDate.setDate(tempDate.getDate() + 1);
         setTargetDate(tempDate);
       } else {
         setYear(`0000${targetDate.getFullYear()}`.slice(-4));
@@ -94,13 +98,14 @@ export default function Age({ navigation }) {
     if (valideDate(tempDate, 0)) {
       const date = parseInt((currentDate - tempDate) / 3600000 / 24, 10);
       dispatch(UserCreators.changeAge(date));
-      navigation.navigate('Gender');
+      navigation.navigate('Height');
     }
   }
 
   return (
     <TouchableWithoutFeedback onPress={() => handleClickOut()}>
       <Container>
+        <QuestionImage />
         <QuestionText>Qual sua data de nascimento?</QuestionText>
         <Picker>
           <PickerInput
@@ -132,7 +137,6 @@ export default function Age({ navigation }) {
         </Picker>
         {show && (
           <DateTimePicker
-            locale="es"
             value={targetDate}
             display="calendar"
             onChange={changeDate}

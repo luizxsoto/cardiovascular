@@ -1,8 +1,11 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import imageBackground from '~/assets/images/mesaMedico.jpg';
 
 export const Container = styled.ImageBackground.attrs({
-  imageStyle: { opacity: 0.3 },
+  imageStyle: { opacity: 0.1 },
+  source: imageBackground,
+  blurRadius: 0.5,
 })`
   flex: 1;
   align-items: center;
@@ -23,22 +26,23 @@ export const Panel = styled.View`
   border-radius: 10px;
 `;
 
-export const ResponseBtn = styled(RectButton).attrs({})`
+export const PanelBtn = styled(RectButton).attrs({})`
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 20%;
   height: 70%;
-  background: rgba(0, 0, 0, 0.2);
+  background: ${props =>
+    props.checked ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.2)'};
   border-radius: 10px;
 `;
 
-export const ResponseImage = styled.Image`
+export const PanelImage = styled.Image`
   width: 30px;
   height: 30px;
 `;
 
-export const ResponseText = styled.Text`
+export const PanelText = styled.Text`
   font-size: 20px;
   color: #000;
   text-align: center;

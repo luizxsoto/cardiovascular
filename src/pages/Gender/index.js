@@ -4,6 +4,12 @@ import { Creators as UserCreators } from '~/store/ducks/user';
 
 import {
   Container,
+  Attention,
+  AttentionRow,
+  AttentionImage,
+  AttentionTitle,
+  AttentionMessage,
+  AttentionButton,
   QuestionImage,
   QuestionText,
   Panel,
@@ -18,15 +24,36 @@ import adultoF from '~/assets/images/adultoF.png';
 export default function Gender({ navigation }) {
   const dispatch = useDispatch();
   const [gender, setGender] = useState();
+  const [attention, setAttention] = useState(true);
 
   function handleSubmit(option) {
     setGender(option);
     dispatch(UserCreators.changeGender(option));
-    navigation.navigate('Height');
+    navigation.navigate('Age');
   }
 
   return (
     <Container>
+      {attention && (
+        <Attention>
+          <AttentionRow>
+            <AttentionImage />
+            <AttentionTitle>Olá, Luizin!</AttentionTitle>
+          </AttentionRow>
+          <AttentionMessage>
+            Nas próximas telas iremos fazer um checkup da sua saúde
+            cadiovascular. Teremos três tipos depeguntas:
+          </AttentionMessage>
+          <AttentionMessage>a) Objetivas, como idade e peso</AttentionMessage>
+          <AttentionMessage>b) Subjetivas, como bebe ou fuma</AttentionMessage>
+          <AttentionMessage>
+            c) Clínicas, como estado do seu colesterou
+          </AttentionMessage>
+          <AttentionButton onPress={() => setAttention(false)}>
+            <AttentionMessage>Vamos lá?</AttentionMessage>
+          </AttentionButton>
+        </Attention>
+      )}
       <QuestionImage />
       <QuestionText>Seu sexo é:</QuestionText>
       <Panel>
@@ -45,5 +72,5 @@ export default function Gender({ navigation }) {
 }
 
 Gender.navigationOptions = {
-  title: 'Genero',
+  title: 'Sobre você',
 };

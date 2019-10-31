@@ -1,21 +1,22 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import imageBackground from '~/assets/images/mesaMedico.jpg';
-import gender from '~/assets/images/gender.png';
+import height from '~/assets/images/height.png';
 
 export const Container = styled.ImageBackground.attrs({
   imageStyle: { opacity: 0.1 },
   source: imageBackground,
+  blurRadius: 0.5,
 })`
   flex: 1;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  padding: 20px;
   background: #eee;
 `;
 
 export const QuestionImage = styled.Image.attrs({
-  source: gender,
+  source: height,
 })`
   width: 150px;
   height: 150px;
@@ -23,7 +24,7 @@ export const QuestionImage = styled.Image.attrs({
 
 export const QuestionText = styled.Text`
   width: 90%;
-  height: 50px;
+  height: 70px;
   text-align: center;
   font-size: 28px;
   color: #f95f62;
@@ -31,7 +32,8 @@ export const QuestionText = styled.Text`
   background: rgba(0, 0, 0, 0.1);
   text-align: center;
   text-align-vertical: center;
-  margin: 5% 0;
+  margin: 20px 0;
+  border-radius: 10px;
 `;
 
 export const Panel = styled.View`
@@ -64,14 +66,13 @@ export const SendButton = styled(RectButton).attrs({})`
   align-items: center;
   justify-content: center;
   width: 200px;
-  height: 50px;
+  height: 60px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  margin-top: 5%;
+  margin-top: 20px;
 `;
 
 export const SendText = styled.Text`
-  width: 100%;
   font-size: 28px;
   font-weight: bold;
   color: #f95f62;

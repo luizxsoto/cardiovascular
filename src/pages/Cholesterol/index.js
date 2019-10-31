@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Creators as UserCreators } from '~/store/ducks/user';
 
-import image from '~/assets/images/mesaMedico.jpg';
 import normal from '~/assets/images/normal.png';
 import acimaNormal from '~/assets/images/acimaNormal.png';
 import bemAcimaNormal from '~/assets/images/bemAcimaNormal.png';
-import { Container, Panel, CholesterolImage, CholesterolText } from './styles';
+import {
+  Container,
+  Attention,
+  AttentionRow,
+  AttentionImage,
+  AttentionTitle,
+  AttentionMessage,
+  AttentionButton,
+  Panel,
+  CholesterolImage,
+  CholesterolText,
+} from './styles';
 
 export default function Cholesterol({ navigation }) {
   const dispatch = useDispatch();
+  const [attention, setAttention] = useState(true);
 
   function handleSubmit(response) {
     dispatch(UserCreators.changeCholesterol(response));
@@ -17,7 +28,23 @@ export default function Cholesterol({ navigation }) {
   }
 
   return (
-    <Container source={image}>
+    <Container>
+      {attention && (
+        <Attention>
+          <AttentionRow>
+            <AttentionImage />
+            <AttentionTitle>Atenção, Luizin!</AttentionTitle>
+          </AttentionRow>
+          <AttentionMessage>
+            As repostas a seguir exigem que você tenha embaseamento clínico
+            realizado por examaes periódicos e com avaliação médica. Informações
+            imprecisas tornarão seu teste imprecioso.
+          </AttentionMessage>
+          <AttentionButton onPress={() => setAttention(false)}>
+            <AttentionMessage>Ciente!</AttentionMessage>
+          </AttentionButton>
+        </Attention>
+      )}
       <Panel onPress={() => handleSubmit(1)}>
         <CholesterolImage source={normal} />
         <CholesterolText>Normal</CholesterolText>

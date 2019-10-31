@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch } from 'react-redux';
 import { Creators as UserCreators } from '~/store/ducks/user';
 
-import image from '~/assets/images/mesaMedico.jpg';
 import {
   Container,
   Case,
@@ -41,12 +40,12 @@ export default function Pressure({ navigation }) {
     } else {
       dispatch(UserCreators.changeSystolic(systolic));
       dispatch(UserCreators.changeDiastolic(diastolic));
-      navigation.navigate('Cholesterol');
+      navigation.navigate('Response');
     }
   }
 
   return (
-    <Container source={image}>
+    <Container>
       <Case>
         <Center>
           <Painel>
