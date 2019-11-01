@@ -4,8 +4,6 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Sign from './pages/Sign/index';
-import SignIn from './pages/Sign/signin';
-import SignUp from './pages/Sign/signup';
 import Gender from './pages/Gender';
 import Age from './pages/Age';
 import Height from './pages/Height';
@@ -23,8 +21,6 @@ export default (isSigned = false) =>
     createStackNavigator(
       {
         Sign,
-        SignIn,
-        SignUp,
         Gender,
         Age,
         Height,
