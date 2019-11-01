@@ -44,7 +44,9 @@ export const Picker = styled.View`
   margin: 30px 0;
 `;
 
-export const PickerInput = styled.TextInput`
+export const PickerInput = styled.TextInput.attrs({
+  keyboardType: 'numeric',
+})`
   width: 23%;
   height: 100%;
   margin: 0;

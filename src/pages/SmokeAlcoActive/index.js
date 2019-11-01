@@ -45,7 +45,7 @@ export default function SmokeAlcoActive({ navigation }) {
         <PanelBtn checked={smoke === 1} onPress={() => setSmoke(1)}>
           <PanelImage source={fuma} />
         </PanelBtn>
-        <PanelText>OU</PanelText>
+        <PanelText>FUMA?</PanelText>
         <PanelBtn checked={smoke === 0} onPress={() => setSmoke(0)}>
           <PanelImage source={naoFuma} />
         </PanelBtn>
@@ -54,7 +54,7 @@ export default function SmokeAlcoActive({ navigation }) {
         <PanelBtn checked={alco === 1} onPress={() => setAlco(1)}>
           <PanelImage source={bebe} />
         </PanelBtn>
-        <PanelText>OU</PanelText>
+        <PanelText>ÁLCOOL?</PanelText>
         <PanelBtn checked={alco === 0} onPress={() => setAlco(0)}>
           <PanelImage source={naoBebe} />
         </PanelBtn>
@@ -63,7 +63,7 @@ export default function SmokeAlcoActive({ navigation }) {
         <PanelBtn checked={active === 1} onPress={() => setActive(1)}>
           <PanelImage source={maoSim} />
         </PanelBtn>
-        <PanelText>SE EXERCITA?</PanelText>
+        <PanelText>EXERCÍCIO?</PanelText>
         <PanelBtn checked={active === 0} onPress={() => setActive(0)}>
           <PanelImage source={maoNao} />
         </PanelBtn>

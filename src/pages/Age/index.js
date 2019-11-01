@@ -24,9 +24,11 @@ export default function Age({ navigation }) {
   const [year, setYear] = useState('2000');
   const [targetDate, setTargetDate] = useState(new Date('2000-01-02'));
   const [show, setShow] = useState(false);
+  const [change, setChange] = useState(false);
 
   function valideDate(date, alert) {
     if (!isNaN(date) && currentDate > date) {
+      setChange(true);
       return true;
     }
     if (alert) {
@@ -52,7 +54,7 @@ export default function Age({ navigation }) {
     const tempDate = new Date(`${year}-${month}-${`00${day}`.slice(-2)}`);
     if (valideDate(tempDate, 1)) {
       setDay(`00${day}`.slice(-2));
-      tempDate.setDate(tempDate.getDate() + 1);
+      // tempDate.setDate(tempDate.getDate() + 1); // <- if necessary
       setTargetDate(tempDate);
     } else {
       setDay(`00${targetDate.getDate()}`.slice(-2));
@@ -63,7 +65,7 @@ export default function Age({ navigation }) {
     const tempDate = new Date(`${year}-${`00${month}`.slice(-2)}-${day}`);
     if (valideDate(tempDate, 1)) {
       setMonth(`00${month}`.slice(-2));
-      tempDate.setDate(tempDate.getDate() + 1);
+      // tempDate.setDate(tempDate.getDate() + 1); // <- if necessary
       setTargetDate(tempDate);
     } else {
       setMonth(`00${targetDate.getMonth() + 1}`.slice(-2));
@@ -75,7 +77,7 @@ export default function Age({ navigation }) {
       const tempDate = new Date(`${`0000${year}`.slice(-4)}-${month}-${day}`);
       if (valideDate(tempDate, 1)) {
         setYear(`0000${year}`.slice(-4));
-        tempDate.setDate(tempDate.getDate() + 1);
+        // tempDate.setDate(tempDate.getDate() + 1); // <- if necessary
         setTargetDate(tempDate);
       } else {
         setYear(`0000${targetDate.getFullYear()}`.slice(-4));
@@ -95,10 +97,19 @@ export default function Age({ navigation }) {
         -2
       )}`
     );
-    if (valideDate(tempDate, 0)) {
+    if (valideDate(tempDate, 0) && change) {
       const date = parseInt((currentDate - tempDate) / 3600000 / 24, 10);
       dispatch(UserCreators.changeAge(date));
       navigation.navigate('Height');
+    } else {
+      Alert.alert(
+        'Data alterada?',
+        'Altere a data ao menos uma vez',
+        [{ text: 'OK' }],
+        {
+          cancelable: false,
+        }
+      );
     }
   }
 
@@ -109,21 +120,21 @@ export default function Age({ navigation }) {
         <QuestionText>Qual sua data de nascimento?</QuestionText>
         <Picker>
           <PickerInput
-            keyboardType="numeric"
+            onTouchStart={() => setChange(true)}
             maxLength={2}
             value={day}
             onChangeText={text => setDay(text)}
             onBlur={changeDay}
           />
           <PickerInput
-            keyboardType="numeric"
+            onTouchStart={() => setChange(true)}
             maxLength={2}
             value={month}
             onChangeText={text => setMonth(text)}
             onBlur={changeMonth}
           />
           <PickerInput
-            keyboardType="numeric"
+            onTouchStart={() => setChange(true)}
             maxLength={4}
             value={year}
             onChangeText={text => setYear(text)}

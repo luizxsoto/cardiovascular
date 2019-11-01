@@ -23,18 +23,8 @@ export const Attention = styled.View`
   z-index: 9;
   background: rgba(0, 0, 0, 0.8);
   width: 100%;
-  height: 100%;
   border-radius: 10px;
   padding: 20px;
-`;
-
-export const AttentionRow = styled.View`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
 `;
 
 export const AttentionImage = styled.Image.attrs({
@@ -51,15 +41,19 @@ export const AttentionTitle = styled.Text`
 
 export const AttentionMessage = styled.Text`
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   margin: 5px;
 `;
 
 export const AttentionButton = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
   background: #49b1e9;
-  margin: 20px 0;
+  margin-top: 20px;
   border-radius: 5px;
+  width: 150px;
+  height: 40px;
 `;
 
 export const QuestionImage = styled.Image.attrs({

@@ -8,7 +8,6 @@ import bemAcimaNormal from '~/assets/images/bemAcimaNormal.png';
 import {
   Container,
   Attention,
-  AttentionRow,
   AttentionImage,
   AttentionTitle,
   AttentionMessage,
@@ -31,10 +30,8 @@ export default function Cholesterol({ navigation }) {
     <Container>
       {attention && (
         <Attention>
-          <AttentionRow>
-            <AttentionImage />
-            <AttentionTitle>Atenção, Luizin!</AttentionTitle>
-          </AttentionRow>
+          <AttentionImage />
+          <AttentionTitle>Atenção, Usuario!</AttentionTitle>
           <AttentionMessage>
             As repostas a seguir exigem que você tenha embaseamento clínico
             realizado por examaes periódicos e com avaliação médica. Informações

@@ -25,20 +25,20 @@ export default function Sign({ navigation }) {
     <Container>
       <Panel>
         <LogoImage />
-        <LogoText>Higia</LogoText>
+        <LogoText>Your Life</LogoText>
       </Panel>
       <Panel pos>
-        <Label>Usuario</Label>
+        <Label>Nome</Label>
         <Input />
-        <Label>Senha</Label>
-        <Input secureTextEntry />
+        <Label>E-mail</Label>
+        <Input keyboardType="email-address" />
       </Panel>
       <Panel>
         <SignBtn onPress={handleSignIn}>
-          <SignBtnText>Entrar</SignBtnText>
+          <SignBtnText>Iniciar</SignBtnText>
         </SignBtn>
         <SignBtn background="#fff" onPress={handleSignUp}>
-          <SignBtnText color="rgba(255, 0, 0, 0.7)">Cadastrar</SignBtnText>
+          <SignBtnText color="rgba(255, 0, 0, 0.7)">Entrar</SignBtnText>
         </SignBtn>
       </Panel>
     </Container>

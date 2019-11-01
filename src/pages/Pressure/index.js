@@ -24,11 +24,29 @@ export default function Pressure({ navigation }) {
   const dispatch = useDispatch();
 
   function onChangedSystolic(text) {
-    setSystolic(text.replace(/[^0-9,]/g, ''));
+    if (parseInt(text, 10) <= 20 && text) {
+      setSystolic(text.replace(/[^0-9]/g, ''));
+    } else {
+      if (text) {
+        Alert.alert('Sistólica', 'Sistólica máxima 20', [{ text: 'OK' }], {
+          cancelable: false,
+        });
+      }
+      setSystolic('');
+    }
   }
 
   function onChangedDiastolic(text) {
-    setDiastolic(text.replace(/[^0-9,]/g, ''));
+    if (parseInt(text, 10) <= 10 && text) {
+      setDiastolic(text.replace(/[^0-9]/g, ''));
+    } else {
+      if (text) {
+        Alert.alert('Diastólica', 'Diastólica máxima 10', [{ text: 'OK' }], {
+          cancelable: false,
+        });
+      }
+      setDiastolic('');
+    }
   }
 
   function handleSubmit() {
@@ -38,8 +56,8 @@ export default function Pressure({ navigation }) {
         'Digite ao menos uma resposta para cada pergunta'
       );
     } else {
-      dispatch(UserCreators.changeSystolic(systolic));
-      dispatch(UserCreators.changeDiastolic(diastolic));
+      dispatch(UserCreators.changeSystolic(systolic * 10));
+      dispatch(UserCreators.changeDiastolic(diastolic * 10));
       navigation.navigate('Response');
     }
   }
@@ -49,8 +67,18 @@ export default function Pressure({ navigation }) {
       <Case>
         <Center>
           <Painel>
-            <PainelInput value={systolic} onChangeText={onChangedSystolic} />
-            <PainelInput value={diastolic} onChangeText={onChangedDiastolic} />
+            <PainelInput
+              maxLength={2}
+              placeholder="12"
+              value={systolic}
+              onChangeText={onChangedSystolic}
+            />
+            <PainelInput
+              maxLength={2}
+              placeholder="8"
+              value={diastolic}
+              onChangeText={onChangedDiastolic}
+            />
           </Painel>
           <CenterRow>
             <CenterButton onPress={() => {}}>

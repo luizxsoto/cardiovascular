@@ -28,7 +28,7 @@ export const ScorePanel = styled.View`
   background: #f95f62;
   border-radius: 75px;
   elevation: 5;
-  margin: 30px 0;
+  margin: 20px 0;
 `;
 
 export const ScorePoints = styled.Text`
@@ -48,7 +48,7 @@ export const ScoreMessageTitle = styled.Text`
 export const ScoreMessage = styled.Text`
   font-size: 18px;
   text-align: center;
-  margin: 15px 0;
+  margin: 10px 0;
 `;
 
 export const AdviceMessage = styled.Text`

@@ -5,7 +5,6 @@ import { Creators as UserCreators } from '~/store/ducks/user';
 import {
   Container,
   Attention,
-  AttentionRow,
   AttentionImage,
   AttentionTitle,
   AttentionMessage,
@@ -36,18 +35,16 @@ export default function Gender({ navigation }) {
     <Container>
       {attention && (
         <Attention>
-          <AttentionRow>
-            <AttentionImage />
-            <AttentionTitle>Olá, Luizin!</AttentionTitle>
-          </AttentionRow>
+          <AttentionImage />
+          <AttentionTitle>Olá, Usuário!</AttentionTitle>
           <AttentionMessage>
-            Nas próximas telas iremos fazer um checkup da sua saúde
-            cadiovascular. Teremos três tipos depeguntas:
+            Nas próximas telas iremos fazer um avaliação da sua saúde
+            cadiovascular. Teremos três tipos de perguntas:
           </AttentionMessage>
-          <AttentionMessage>a) Objetivas, como idade e peso</AttentionMessage>
-          <AttentionMessage>b) Subjetivas, como bebe ou fuma</AttentionMessage>
+          <AttentionMessage>Objetivas: Idade e peso</AttentionMessage>
+          <AttentionMessage>Subjetivas: Hábitos pessoais</AttentionMessage>
           <AttentionMessage>
-            c) Clínicas, como estado do seu colesterou
+            Clínicas: Pressão, glicose e colesterol
           </AttentionMessage>
           <AttentionButton onPress={() => setAttention(false)}>
             <AttentionMessage>Vamos lá?</AttentionMessage>

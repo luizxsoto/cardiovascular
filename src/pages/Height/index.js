@@ -18,9 +18,14 @@ export default function Height({ navigation }) {
   const [heightInput, setHeightInput] = useState();
 
   function onChangeHeight(text) {
-    if (parseInt(text, 10) <= 250 && text) {
+    if (parseInt(text, 10) <= 250) {
       setHeightInput(text.replace(/[^0-9]/g, ''));
     } else {
+      if (text) {
+        Alert.alert('Altura', 'Altura máxima 250 cm', [{ text: 'OK' }], {
+          cancelable: false,
+        });
+      }
       setHeightInput('');
     }
   }
@@ -32,7 +37,7 @@ export default function Height({ navigation }) {
     } else {
       Alert.alert(
         'Altura invalida',
-        'Digite uma Altura válida',
+        'Digite uma Altura válida, maior ou igual a 100 cm',
         [{ text: 'OK' }],
         {
           cancelable: false,

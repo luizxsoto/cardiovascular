@@ -18,9 +18,14 @@ export default function Weight({ navigation }) {
   const [weightInput, setWeightInput] = useState();
 
   function onChangeWeight(text) {
-    if (parseInt(text, 10) <= 250 && text) {
+    if (parseInt(text, 10) <= 150 && text) {
       setWeightInput(text.replace(/[^0-9]/g, ''));
     } else {
+      if (text) {
+        Alert.alert('Peso', 'Peso máximo 150 kg', [{ text: 'OK' }], {
+          cancelable: false,
+        });
+      }
       setWeightInput('');
     }
   }
@@ -31,8 +36,8 @@ export default function Weight({ navigation }) {
       navigation.navigate('SmokeAlcoActive');
     } else {
       Alert.alert(
-        'Altura invalida',
-        'Digite uma Altura válida',
+        'Peso invalido',
+        'Digite um Peso válido, maior ou igual a 40 kg',
         [{ text: 'OK' }],
         {
           cancelable: false,

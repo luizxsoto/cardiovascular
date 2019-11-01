@@ -27,7 +27,7 @@ export default function Gluc({ navigation }) {
       </Panel>
       <Panel onPress={() => handleSubmit(3)}>
         <GlucImage source={bemAcimaNormal} />
-        <GlucText>Bem acima do normal</GlucText>
+        <GlucText>Muito acima do normal</GlucText>
       </Panel>
     </Container>
   );
