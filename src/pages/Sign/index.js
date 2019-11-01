@@ -25,7 +25,7 @@ export default function Sign({ navigation }) {
     <Container>
       <Panel>
         <LogoImage />
-        <LogoText>Your Life</LogoText>
+        <LogoText>Higia</LogoText>
       </Panel>
       <Panel pos>
         <Label>Nome</Label>

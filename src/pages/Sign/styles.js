@@ -46,8 +46,8 @@ export const Input = styled.TextInput.attrs({
 export const LogoImage = styled.Image.attrs({
   source: cardiogram,
 })`
-  width: 64px;
-  height: 64px;
+  width: 100px;
+  height: 100px;
 `;
 
 export const LogoText = styled.Text`

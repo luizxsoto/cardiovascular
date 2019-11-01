@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { apiApp } from '~/services/api';
 
@@ -13,12 +14,14 @@ import {
   ScoreMessageTitle,
   ScoreMessage,
   AdviceMessage,
+  RowPanel,
   BetterScorePanel,
   BetterScorePoints,
   BetterScoreLabel,
+  AgainButton,
 } from './styles';
 
-export default function Response() {
+export default function Response({ navigation }) {
   const [score, setScore] = useState(0);
   const age = useSelector(state => state.user.age);
   const gender = useSelector(state => state.user.gender);
@@ -134,10 +137,16 @@ export default function Response() {
       <ScoreMessage>{renderMessage()}</ScoreMessage>
       <AdviceMessage>Algo está atrapalhando seu score!</AdviceMessage>
       <AdviceMessage>Se você o evitasse, seu score seria de:</AdviceMessage>
-      <BetterScorePanel>
-        <BetterScorePoints>100</BetterScorePoints>
-        <BetterScoreLabel>pts</BetterScoreLabel>
-      </BetterScorePanel>
+      <RowPanel>
+        <BetterScorePanel disp />
+        <BetterScorePanel>
+          <BetterScorePoints>100</BetterScorePoints>
+          <BetterScoreLabel>pts</BetterScoreLabel>
+        </BetterScorePanel>
+        <AgainButton onPress={() => navigation.navigate('Sign')}>
+          <Icon name="reload" size={30} color="#fff" />
+        </AgainButton>
+      </RowPanel>
     </Container>
   );
 }

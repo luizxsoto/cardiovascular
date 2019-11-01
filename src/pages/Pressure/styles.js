@@ -58,11 +58,11 @@ export const PainelInput = styled.TextInput.attrs({
   keyboardType: 'numeric',
 })`
   width: 90%;
-  height: 30%;
+  height: 35%;
   font-size: 70px;
   text-align: right;
   background: #eee;
-  padding: 0;
+  padding: 0 5px;
   margin: 5px 0;
   justify-content: center;
   align-items: flex-end;

@@ -57,15 +57,22 @@ export const AdviceMessage = styled.Text`
   margin-bottom: 5px;
 `;
 
+export const RowPanel = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+`;
+
 export const BetterScorePanel = styled.View`
   align-items: center;
   justify-content: center;
   width: 76px;
   height: 76px;
-  background: #49b1e9;
+  background: ${props => (props.disp ? 'transparent' : '#49b1e9')};
   border-radius: 38px;
-  elevation: 5;
-  margin-top: 20px;
+  elevation: ${props => (props.disp ? '0' : '5')};
 `;
 
 export const BetterScorePoints = styled.Text`
@@ -76,6 +83,15 @@ export const BetterScorePoints = styled.Text`
 
 export const BetterScoreLabel = styled.Text`
   font-size: 12px;
-  font-weight: bold;
   color: #fff;
+`;
+
+export const AgainButton = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: #0f0;
+  border-radius: 25px;
+  elevation: 5;
 `;
