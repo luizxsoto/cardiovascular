@@ -20,7 +20,7 @@ import {
 import adultoM from '~/assets/images/adultoM.png';
 import adultoF from '~/assets/images/adultoF.png';
 
-export default function Gender({ navigation }) {
+export default function Sex({ navigation }) {
   const dispatch = useDispatch();
   const [gender, setGender] = useState();
   const [attention, setAttention] = useState(true);
@@ -28,7 +28,7 @@ export default function Gender({ navigation }) {
   function handleSubmit(option) {
     setGender(option);
     dispatch(UserCreators.changeGender(option));
-    navigation.navigate('Age');
+    navigation.navigate('Birthday');
   }
 
   return (
@@ -68,6 +68,6 @@ export default function Gender({ navigation }) {
   );
 }
 
-Gender.navigationOptions = {
+Sex.navigationOptions = {
   title: 'Sobre você',
 };

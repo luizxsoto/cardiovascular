@@ -16,7 +16,7 @@ import {
   SendText,
 } from './styles';
 
-export default function Age({ navigation }) {
+export default function Birthday({ navigation }) {
   const dispatch = useDispatch();
   const currentDate = new Date();
   const [day, setDay] = useState('01');
@@ -163,6 +163,6 @@ export default function Age({ navigation }) {
   );
 }
 
-Age.navigationOptions = {
+Birthday.navigationOptions = {
   title: 'Sobre você',
 };

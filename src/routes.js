@@ -4,8 +4,8 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Sign from './pages/Sign/index';
-import Gender from './pages/Gender';
-import Age from './pages/Age';
+import Sex from './pages/Sex';
+import Birthday from './pages/Birthday';
 import Height from './pages/Height';
 import Weight from './pages/Weight';
 import SmokeAlcoActive from './pages/SmokeAlcoActive';
@@ -21,8 +21,8 @@ export default (isSigned = false) =>
     createStackNavigator(
       {
         Sign,
-        Gender,
-        Age,
+        Sex,
+        Birthday,
         Height,
         Weight,
         SmokeAlcoActive,

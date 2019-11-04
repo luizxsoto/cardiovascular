@@ -13,7 +13,7 @@ import {
 
 export default function Sign({ navigation }) {
   function handleSignIn() {
-    navigation.navigate('Gender');
+    navigation.navigate('Sex');
     // navigation.navigate('SignIn');
   }
 
@@ -35,7 +35,7 @@ export default function Sign({ navigation }) {
       </Panel>
       <Panel>
         <SignBtn onPress={handleSignIn}>
-          <SignBtnText>Iniciar</SignBtnText>
+          <SignBtnText>Verificar minha saúde</SignBtnText>
         </SignBtn>
         <SignBtn background="#fff" onPress={handleSignUp}>
           <SignBtnText color="rgba(255, 0, 0, 0.7)">Entrar</SignBtnText>
