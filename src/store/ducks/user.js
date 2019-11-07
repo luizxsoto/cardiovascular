@@ -4,6 +4,7 @@ import produce from 'immer';
 
 /* Types & Action Creators */
 export const { Types, Creators } = createActions({
+  changeUser: ['user'],
   changeAge: ['answer'],
   changeGender: ['answer'],
   changeHeight: ['answer'],
@@ -19,6 +20,7 @@ export const { Types, Creators } = createActions({
 
 /* Initial State */
 const INITIAL_STATE = {
+  user: null,
   age: -1,
   gender: -1,
   height: -1,
@@ -33,6 +35,11 @@ const INITIAL_STATE = {
 };
 
 /* Reducers handlers */
+const changeUser = (state = INITIAL_STATE, action) =>
+  produce(state, draft => {
+    draft.user = action.user;
+  });
+
 const changeAge = (state = INITIAL_STATE, action) =>
   produce(state, draft => {
     draft.age = action.answer;
@@ -90,6 +97,7 @@ const changeActive = (state = INITIAL_STATE, action) =>
 
 /* Reducers */
 export const reducer = createReducer(INITIAL_STATE, {
+  [Types.CHANGE_USER]: changeUser,
   [Types.CHANGE_AGE]: changeAge,
   [Types.CHANGE_GENDER]: changeGender,
   [Types.CHANGE_HEIGHT]: changeHeight,

@@ -1,12 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { useDispatch } from 'react-redux';
 
-// import { Container } from './styles';
+import { Creators as AuthCreators } from '~/store/ducks/auth';
+
+import { Container, ContainerText, ContainerBtn } from './styles';
 
 export default function Home() {
+  const dispatch = useDispatch();
+
+  function handleSignOut() {
+    dispatch(AuthCreators.signOut());
+  }
+
   return (
-    <View>
-      <Text>Home Here!</Text>
-    </View>
+    <Container>
+      <ContainerText>Logged !</ContainerText>
+      <ContainerBtn onPress={() => handleSignOut()}>
+        <ContainerText color>Sign Out</ContainerText>
+      </ContainerBtn>
+    </Container>
   );
 }
