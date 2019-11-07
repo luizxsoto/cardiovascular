@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-// import { RectButton } from 'react-native-gesture-handler';
+import { RectButton } from 'react-native-gesture-handler';
 import image from '~/assets/images/mesaMedico.jpg';
 import cardiogram from '~/assets/images/cardiogram.png';
 
@@ -14,7 +14,18 @@ export const Container = styled.ImageBackground.attrs({
   justify-content: space-between;
   padding: 0 20px;
   padding-top: 20%;
-  background: rgba(255, 0, 0, 0.5);
+  background: rgba(255, 0, 0, 0.7);
+`;
+
+export const BackBtn = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10;
+  left: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
 `;
 
 export const Panel = styled.View`

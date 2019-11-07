@@ -12,13 +12,12 @@ import {
 } from './styles';
 
 export default function Sign({ navigation }) {
-  function handleSignIn() {
+  function handleTrial() {
     navigation.navigate('Sex');
-    // navigation.navigate('SignIn');
   }
 
-  function handleSignUp() {
-    // navigation.navigate('SignUp');
+  function handleSignIn() {
+    navigation.navigate('SignIn');
   }
 
   return (
@@ -27,17 +26,11 @@ export default function Sign({ navigation }) {
         <LogoImage />
         <LogoText>Higia</LogoText>
       </Panel>
-      <Panel pos>
-        <Label>Nome</Label>
-        <Input />
-        <Label>E-mail</Label>
-        <Input keyboardType="email-address" />
-      </Panel>
       <Panel>
-        <SignBtn onPress={handleSignIn}>
+        <SignBtn onPress={handleTrial}>
           <SignBtnText>Verificar minha saúde</SignBtnText>
         </SignBtn>
-        <SignBtn background="#fff" onPress={handleSignUp}>
+        <SignBtn background="#fff" onPress={handleSignIn}>
           <SignBtnText color="rgba(255, 0, 0, 0.7)">Entrar</SignBtnText>
         </SignBtn>
       </Panel>

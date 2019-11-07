@@ -17,8 +17,8 @@ import {
   PanelText,
 } from './styles';
 
-import adultoM from '~/assets/images/adultoM.png';
-import adultoF from '~/assets/images/adultoF.png';
+import masculino from '~/assets/images/masculino.png';
+import feminino from '~/assets/images/feminino.png';
 
 export default function Sex({ navigation }) {
   const dispatch = useDispatch();
@@ -55,13 +55,11 @@ export default function Sex({ navigation }) {
       <QuestionText>Seu sexo é:</QuestionText>
       <Panel>
         <PanelBtn checked={gender === 1} onPress={() => handleSubmit(1)}>
-          <PanelImage source={adultoF} />
-          <PanelText>F</PanelText>
+          <PanelImage source={feminino} />
         </PanelBtn>
         <PanelText color>/</PanelText>
         <PanelBtn checked={gender === 2} onPress={() => handleSubmit(2)}>
-          <PanelImage source={adultoM} />
-          <PanelText>M</PanelText>
+          <PanelImage source={masculino} />
         </PanelBtn>
       </Panel>
     </Container>

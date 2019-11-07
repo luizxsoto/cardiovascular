@@ -55,6 +55,8 @@ export default function Height({ navigation }) {
           placeholder="Em centimetros"
           value={heightInput}
           onChangeText={onChangeHeight}
+          returnKeyType="send"
+          onSubmitEditing={() => handleSubmit()}
         />
       </Panel>
       <SendButton onPress={() => handleSubmit()}>

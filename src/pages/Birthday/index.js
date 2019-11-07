@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,72 +18,77 @@ import {
 
 export default function Birthday({ navigation }) {
   const dispatch = useDispatch();
+  const monthRef = useRef();
+  const yearRef = useRef();
   const currentDate = new Date();
-  const [day, setDay] = useState('01');
-  const [month, setMonth] = useState('01');
-  const [year, setYear] = useState('2000');
-  const [targetDate, setTargetDate] = useState(new Date('2000-01-02'));
+  const [day, setDay] = useState('');
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
+  const [targetDate, setTargetDate] = useState(new Date('2000-01-01'));
   const [show, setShow] = useState(false);
-  const [change, setChange] = useState(false);
 
-  function valideDate(date, alert) {
+  function valideDate(date) {
     if (!isNaN(date) && currentDate > date) {
-      setChange(true);
       return true;
     }
-    if (alert) {
-      Alert.alert('Data invalida', 'Digite uma data válida', [{ text: 'OK' }], {
-        cancelable: false,
-      });
-      return false;
-    }
+    Alert.alert('Data invalida', 'Digite uma data válida', [{ text: 'OK' }], {
+      cancelable: false,
+    });
     return false;
   }
 
   function changeDate(event, date) {
     setShow(false);
     if (date) {
-      setDay(`00${date.getDate()}`.slice(-2));
-      setMonth(`00${date.getMonth() + 1}`.slice(-2));
-      setYear(`0000${date.getFullYear()}`.slice(-4));
+      setDay(`0${date.getDate()}`.slice(-2));
+      setMonth(`0${date.getMonth() + 1}`.slice(-2));
+      setYear(`0${date.getFullYear()}`.slice(-4));
       setTargetDate(date);
     }
   }
 
-  function changeDay() {
-    const tempDate = new Date(`${year}-${month}-${`00${day}`.slice(-2)}`);
-    if (valideDate(tempDate, 1)) {
-      setDay(`00${day}`.slice(-2));
-      // tempDate.setDate(tempDate.getDate() + 1); // <- if necessary
-      setTargetDate(tempDate);
+  function changeDay(text) {
+    // tempDate.setDate(tempDate.getDate() + 1); // <- if necessary
+    if (text > 3 && text < 10) {
+      setDay(`0${text}`.slice(-2));
+      monthRef.current.focus();
+    } else if (text > 31) {
+      setDay('31');
+      monthRef.current.focus();
+    } else if (text === '0' || text === '00') {
+      setDay('');
+    } else if (text.length > 1) {
+      setDay(`0${text.replace(/[^0-9]/g, '')}`.slice(-2));
+      monthRef.current.focus();
     } else {
-      setDay(`00${targetDate.getDate()}`.slice(-2));
+      setDay(text.replace(/[^0-9]/g, ''));
     }
   }
 
-  function changeMonth() {
-    const tempDate = new Date(`${year}-${`00${month}`.slice(-2)}-${day}`);
-    if (valideDate(tempDate, 1)) {
-      setMonth(`00${month}`.slice(-2));
-      // tempDate.setDate(tempDate.getDate() + 1); // <- if necessary
-      setTargetDate(tempDate);
+  function changeMonth(text) {
+    if (text > 1 && text < 10) {
+      setMonth(`0${text}`.slice(-2));
+      yearRef.current.focus();
+    } else if (text > 12) {
+      setMonth('12');
+      yearRef.current.focus();
+    } else if (text === '0' || text === '00') {
+      setMonth('');
+    } else if (text.length > 1) {
+      setMonth(`0${text.replace(/[^0-9]/g, '')}`.slice(-2));
+      yearRef.current.focus();
     } else {
-      setMonth(`00${targetDate.getMonth() + 1}`.slice(-2));
+      setMonth(text.replace(/[^0-9]/g, ''));
     }
   }
 
-  function changeYear() {
-    if (year <= currentDate.getFullYear() && year >= 1900) {
-      const tempDate = new Date(`${`0000${year}`.slice(-4)}-${month}-${day}`);
-      if (valideDate(tempDate, 1)) {
-        setYear(`0000${year}`.slice(-4));
-        // tempDate.setDate(tempDate.getDate() + 1); // <- if necessary
-        setTargetDate(tempDate);
-      } else {
-        setYear(`0000${targetDate.getFullYear()}`.slice(-4));
-      }
+  function changeYear(text) {
+    if (text > 2000) {
+      setYear('2000');
+    } else if (text === '0') {
+      setYear('');
     } else {
-      setYear(`0000${targetDate.getFullYear()}`.slice(-4));
+      setYear(text.replace(/[^0-9]/g, ''));
     }
   }
 
@@ -92,24 +97,35 @@ export default function Birthday({ navigation }) {
   }
 
   function handleSubmit() {
-    const tempDate = new Date(
-      `${`0000${year}`.slice(-4)}-${`00${month}`.slice(-2)}-${`00${day}`.slice(
-        -2
-      )}`
-    );
-    if (valideDate(tempDate, 0) && change) {
-      const date = parseInt((currentDate - tempDate) / 3600000 / 24, 10);
-      dispatch(UserCreators.changeAge(date));
-      navigation.navigate('Height');
-    } else {
+    if (!day || !month || !year) {
       Alert.alert(
-        'Data alterada?',
-        'Altere a data ao menos uma vez',
+        'Preencha os campos',
+        'É necessário que preencha todos campos para realizarmos a predição',
         [{ text: 'OK' }],
         {
           cancelable: false,
         }
       );
+      return;
+    }
+    if (year < 1900) {
+      Alert.alert(
+        'Data muito distante',
+        'Nosso modelo foi treinado para pessoas que nasceram no mínimo em 1900',
+        [{ text: 'OK' }],
+        {
+          cancelable: false,
+        }
+      );
+      return;
+    }
+    const tempDate = new Date(
+      `${`0${year}`.slice(-4)}-${`0${month}`.slice(-2)}-${`0${day}`.slice(-2)}`
+    );
+    if (valideDate(tempDate)) {
+      const date = parseInt((currentDate - tempDate) / 3600000 / 24, 10);
+      dispatch(UserCreators.changeAge(date));
+      navigation.navigate('Height');
     }
   }
 
@@ -120,25 +136,32 @@ export default function Birthday({ navigation }) {
         <QuestionText>Qual sua data de nascimento?</QuestionText>
         <Picker>
           <PickerInput
-            onTouchStart={() => setChange(true)}
             maxLength={2}
             value={day}
-            onChangeText={text => setDay(text)}
-            onBlur={changeDay}
+            onChangeText={text => changeDay(text)}
+            returnKeyType="next"
+            onSubmitEditing={() => monthRef.current.focus()}
+            onBlur={() => setDay(`0${day}`.slice(-2))}
+            placeholder="Dia"
           />
           <PickerInput
-            onTouchStart={() => setChange(true)}
+            ref={monthRef}
             maxLength={2}
             value={month}
-            onChangeText={text => setMonth(text)}
-            onBlur={changeMonth}
+            onChangeText={text => changeMonth(text)}
+            returnKeyType="next"
+            onSubmitEditing={() => yearRef.current.focus()}
+            onBlur={() => setMonth(`0${month}`.slice(-2))}
+            placeholder="Mês"
           />
           <PickerInput
-            onTouchStart={() => setChange(true)}
+            ref={yearRef}
             maxLength={4}
             value={year}
-            onChangeText={text => setYear(text)}
-            onBlur={changeYear}
+            onChangeText={text => changeYear(text)}
+            returnKeyType="send"
+            onSubmitEditing={() => handleSubmit()}
+            placeholder="Ano"
           />
           <TouchableWithoutFeedback onPress={() => handleClickOut()}>
             <CalendarButton onPress={() => setShow(true)}>
@@ -151,6 +174,8 @@ export default function Birthday({ navigation }) {
             value={targetDate}
             display="calendar"
             onChange={changeDate}
+            maximumDate={new Date('2000-12-31')}
+            minimumDate={new Date('1900-01-01')}
           />
         )}
         <TouchableWithoutFeedback onPress={() => handleClickOut()}>

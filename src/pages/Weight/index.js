@@ -55,6 +55,8 @@ export default function Weight({ navigation }) {
           placeholder="Em kilos"
           value={weightInput}
           onChangeText={onChangeWeight}
+          returnKeyType="send"
+          onSubmitEditing={() => handleSubmit()}
         />
       </Panel>
       <SendButton onPress={() => handleSubmit()}>

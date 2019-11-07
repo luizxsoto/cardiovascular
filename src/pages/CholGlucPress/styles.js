@@ -1,8 +1,7 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import imageBackground from '~/assets/images/mesaMedico.jpg';
-import gender from '~/assets/images/gender.png';
-import welcome from '~/assets/images/welcome.png';
+import warning from '~/assets/images/warning.png';
 
 export const Container = styled.ImageBackground.attrs({
   imageStyle: { opacity: 0.1 },
@@ -28,7 +27,7 @@ export const Attention = styled.View`
 `;
 
 export const AttentionImage = styled.Image.attrs({
-  source: welcome,
+  source: warning,
 })`
   width: 150px;
   height: 150px;
@@ -56,59 +55,76 @@ export const AttentionButton = styled(RectButton)`
   height: 40px;
 `;
 
-export const QuestionImage = styled.Image.attrs({
-  source: gender,
-})`
-  width: 150px;
-  height: 150px;
-  margin-bottom: 10%;
-`;
-
 export const QuestionText = styled.Text`
   width: 90%;
-  height: 70px;
+  height: 40px;
   text-align: center;
-  font-size: 28px;
+  font-size: 24px;
   color: #f95f62;
   font-weight: bold;
   background: rgba(0, 0, 0, 0.1);
   text-align: center;
   text-align-vertical: center;
-  border-radius: 5px;
-  margin-bottom: 10%;
-`;
-
-export const Panel = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  height: 100px;
-  padding: 0 20px;
-  background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
 `;
 
-export const PanelBtn = styled(RectButton).attrs({})`
-  flex-direction: column;
+export const Panel = styled.KeyboardAvoidingView.attrs({
+  behavior: 'padding',
+})`
+  width: 100%;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  width: 20%;
-  height: 70%;
-  margin: 10px;
+  justify-content: ${props => (props.align ? 'center' : 'space-between')};
+  margin: 20px 0;
+`;
+
+export const PanelBtn = styled(RectButton)`
+  align-items: center;
+  justify-content: flex-start;
+  width: 30%;
+  height: 100px;
+  padding: 10px 0;
   background: ${props =>
-    props.checked ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.2)'};
+    props.checked ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.9)'};
   border-radius: 10px;
 `;
 
 export const PanelImage = styled.Image`
   width: 30px;
-  height: 50px;
+  height: 30px;
 `;
 
 export const PanelText = styled.Text`
+  font-size: 18px;
+  color: ${props => (props.checked ? '#fff' : '#000')};
+  text-align: center;
+`;
+
+export const PanelInput = styled.TextInput.attrs({
+  keyboardType: 'numeric',
+})`
+  width: 20%;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
   font-size: 20px;
-  font-weight: bold;
-  color: #f95f62;
+  padding: 0 5px;
+  margin: 0 10px;
+  text-align: center;
+`;
+
+export const SendButton = styled(RectButton).attrs({})`
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+`;
+
+export const SendText = styled.Text`
+  width: 100%;
+  font-size: 28px;
+  color: #fff;
   text-align: center;
 `;

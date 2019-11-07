@@ -7,11 +7,12 @@ import fuma from '~/assets/images/fuma.png';
 import naoFuma from '~/assets/images/naoFuma.png';
 import bebe from '~/assets/images/bebe.png';
 import naoBebe from '~/assets/images/naoBebe.png';
-import maoSim from '~/assets/images/maoSim.png';
-import maoNao from '~/assets/images/maoNao.png';
+import exercita from '~/assets/images/exercita.png';
+import naoExercita from '~/assets/images/naoExercita.png';
 import {
   Container,
   Panel,
+  QuestionText,
   PanelBtn,
   PanelImage,
   PanelText,
@@ -35,37 +36,38 @@ export default function SmokeAlcoActive({ navigation }) {
       dispatch(UserCreators.changeSmoke(smoke));
       dispatch(UserCreators.changeAlco(alco));
       dispatch(UserCreators.changeActive(active));
-      navigation.navigate('Cholesterol');
+      navigation.navigate('CholGlucPress');
     }
   }
 
   return (
     <Container>
+      <QuestionText>Tem costume de :</QuestionText>
       <Panel>
-        <PanelBtn checked={smoke === 1} onPress={() => setSmoke(1)}>
-          <PanelImage source={fuma} />
-        </PanelBtn>
-        <PanelText>FUMA?</PanelText>
         <PanelBtn checked={smoke === 0} onPress={() => setSmoke(0)}>
           <PanelImage source={naoFuma} />
         </PanelBtn>
+        <PanelText>FUMAR?</PanelText>
+        <PanelBtn checked={smoke === 1} onPress={() => setSmoke(1)}>
+          <PanelImage source={fuma} />
+        </PanelBtn>
       </Panel>
       <Panel>
-        <PanelBtn checked={alco === 1} onPress={() => setAlco(1)}>
-          <PanelImage source={bebe} />
-        </PanelBtn>
-        <PanelText>ÁLCOOL?</PanelText>
         <PanelBtn checked={alco === 0} onPress={() => setAlco(0)}>
           <PanelImage source={naoBebe} />
         </PanelBtn>
+        <PanelText>BEBER ÁLCOOl ?</PanelText>
+        <PanelBtn checked={alco === 1} onPress={() => setAlco(1)}>
+          <PanelImage source={bebe} />
+        </PanelBtn>
       </Panel>
       <Panel>
-        <PanelBtn checked={active === 1} onPress={() => setActive(1)}>
-          <PanelImage source={maoSim} />
-        </PanelBtn>
-        <PanelText>EXERCÍCIO?</PanelText>
         <PanelBtn checked={active === 0} onPress={() => setActive(0)}>
-          <PanelImage source={maoNao} />
+          <PanelImage source={naoExercita} />
+        </PanelBtn>
+        <PanelText>SE EXERCITAR?</PanelText>
+        <PanelBtn checked={active === 1} onPress={() => setActive(1)}>
+          <PanelImage source={exercita} />
         </PanelBtn>
       </Panel>
       <SendButton onPress={() => handleSubmit()}>
