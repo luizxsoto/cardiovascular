@@ -56,7 +56,7 @@ export default function SmokeAlcoActive({ navigation }) {
         <PanelBtn checked={alco === 0} onPress={() => setAlco(0)}>
           <PanelImage source={naoBebe} />
         </PanelBtn>
-        <PanelText>BEBER ÁLCOOl ?</PanelText>
+        <PanelText>BEBER ÁLCOOL ?</PanelText>
         <PanelBtn checked={alco === 1} onPress={() => setAlco(1)}>
           <PanelImage source={bebe} />
         </PanelBtn>

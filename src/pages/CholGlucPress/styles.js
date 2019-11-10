@@ -104,10 +104,10 @@ export const PanelInput = styled.TextInput.attrs({
   keyboardType: 'numeric',
 })`
   width: 20%;
-  height: 40px;
+  height: 50px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 32px;
   padding: 0 5px;
   margin: 0 10px;
   text-align: center;
