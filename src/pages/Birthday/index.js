@@ -141,7 +141,7 @@ export default function Birthday({ navigation }) {
             onChangeText={text => changeDay(text)}
             returnKeyType="next"
             onSubmitEditing={() => monthRef.current.focus()}
-            onBlur={() => setDay(`0${day}`.slice(-2))}
+            onBlur={() => day && setDay(`0${day}`.slice(-2))}
             placeholder="Dia"
           />
           <PickerInput
@@ -151,7 +151,7 @@ export default function Birthday({ navigation }) {
             onChangeText={text => changeMonth(text)}
             returnKeyType="next"
             onSubmitEditing={() => yearRef.current.focus()}
-            onBlur={() => setMonth(`0${month}`.slice(-2))}
+            onBlur={() => month && setMonth(`0${month}`.slice(-2))}
             placeholder="Mês"
           />
           <PickerInput

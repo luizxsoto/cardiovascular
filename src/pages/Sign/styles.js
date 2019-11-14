@@ -53,6 +53,19 @@ export const Input = styled.TextInput.attrs({
   border-bottom-width: 1px;
   border-bottom-color: #f00;
 `;
+export const InputName = styled.TextInput.attrs({
+  autoCapitalize: 'words',
+  returnKeyType: 'send',
+  autoCorrect: false,
+})`
+  height: 40px;
+  width: 100%;
+  font-size: 20px;
+  padding: 0 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border-bottom-width: 1px;
+  border-bottom-color: #f00;
+`;
 
 export const LogoImage = styled.Image.attrs({
   source: cardiogram,

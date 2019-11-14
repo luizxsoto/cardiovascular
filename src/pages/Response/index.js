@@ -18,22 +18,15 @@ import {
   BetterScorePanel,
   BetterScorePoints,
   BetterScoreLabel,
-  AgainButton,
+  NextButton,
+  NextText,
 } from './styles';
 
 export default function Response({ navigation }) {
-  const [score, setScore] = useState(0);
-  const age = useSelector(state => state.user.age);
-  const gender = useSelector(state => state.user.gender);
-  const height = useSelector(state => state.user.height);
-  const weight = useSelector(state => state.user.weight);
-  const systolic = useSelector(state => state.user.systolic);
-  const diastolic = useSelector(state => state.user.diastolic);
-  const cholesterol = useSelector(state => state.user.cholesterol);
-  const gluc = useSelector(state => state.user.gluc);
-  const smoke = useSelector(state => state.user.smoke);
-  const alco = useSelector(state => state.user.alco);
-  const active = useSelector(state => state.user.active);
+  const [score, setScore] = useState('...');
+  const user = useSelector(state => state.user);
+  const [title, setTitle] = useState('Carregando...');
+  const [message, setMessage] = useState('Carregando...');
 
   const messages = [
     {
@@ -68,17 +61,17 @@ export default function Response({ navigation }) {
       await apiApp
         .post('/predict', {
           features: [
-            age,
-            gender,
-            height,
-            weight,
-            systolic,
-            diastolic,
-            cholesterol,
-            gluc,
-            smoke,
-            alco,
-            active,
+            user.age,
+            user.gender,
+            user.height,
+            user.weight,
+            user.systolic,
+            user.diastolic,
+            user.cholesterol,
+            user.gluc,
+            user.smoke,
+            user.alco,
+            user.active,
           ],
         })
         .then(res => setScore(parseInt(res.data.probability[0][0] * 100, 10)))
@@ -88,43 +81,27 @@ export default function Response({ navigation }) {
     callApi();
   }, []);
 
-  function renderTitle() {
+  useEffect(() => {
     if (score >= 81) {
-      return messages[0].title;
+      setTitle(messages[0].title);
+      setMessage(messages[0].message);
     }
     if (score >= 61 && score <= 80) {
-      return messages[1].title;
+      setTitle(messages[1].title);
+      setMessage(messages[1].message);
     }
     if (score >= 41 && score <= 60) {
-      return messages[2].title;
+      setTitle(messages[2].title);
+      setMessage(messages[2].message);
     }
     if (score >= 21 && score <= 40) {
-      return messages[3].title;
+      setTitle(messages[3].title);
     }
     if (score >= 1 && score <= 20) {
-      return messages[4].title;
+      setTitle(messages[4].title);
+      setMessage(messages[4].message);
     }
-    return 'Carregando...';
-  }
-
-  function renderMessage() {
-    if (score >= 81) {
-      return messages[0].message;
-    }
-    if (score >= 61 && score <= 80) {
-      return messages[1].message;
-    }
-    if (score >= 41 && score <= 60) {
-      return messages[2].message;
-    }
-    if (score >= 21 && score <= 40) {
-      return messages[3].message;
-    }
-    if (score >= 1 && score <= 20) {
-      return messages[4].message;
-    }
-    return 'Carregando...';
-  }
+  }, [score]);
 
   return (
     <Container>
@@ -133,19 +110,19 @@ export default function Response({ navigation }) {
         <ScorePoints>{score}</ScorePoints>
         <ScoreLabel>pts</ScoreLabel>
       </ScorePanel>
-      <ScoreMessageTitle>{renderTitle()}</ScoreMessageTitle>
-      <ScoreMessage>{renderMessage()}</ScoreMessage>
+      <ScoreMessageTitle>{title}</ScoreMessageTitle>
+      <ScoreMessage>{message}</ScoreMessage>
       <AdviceMessage>Algo está atrapalhando seu score!</AdviceMessage>
       <AdviceMessage>Se você o evitasse, seu score seria de:</AdviceMessage>
       <RowPanel>
-        <BetterScorePanel disp />
+        <NextButton disp />
         <BetterScorePanel>
           <BetterScorePoints>100</BetterScorePoints>
           <BetterScoreLabel>pts</BetterScoreLabel>
         </BetterScorePanel>
-        <AgainButton onPress={() => navigation.navigate('Sign')}>
-          <Icon name="reload" size={30} color="#fff" />
-        </AgainButton>
+        <NextButton onPress={() => navigation.navigate('SignUp')}>
+          <NextText>Saiba mais sobre seu SCORE!</NextText>
+        </NextButton>
       </RowPanel>
     </Container>
   );

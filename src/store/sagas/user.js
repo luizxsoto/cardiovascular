@@ -6,7 +6,7 @@ import { apiUser } from '~/services/api';
 import { Creators as AuthCreators, Types as AuthTypes } from '../ducks/auth';
 import { Creators as UserCreators } from '../ducks/user';
 
-export function* signInRequest({ email, password }) {
+export function* sendResponseRequest({ email, password }) {
   try {
     const response = yield call(apiUser.post, 'sessions', {
       email,
@@ -23,7 +23,7 @@ export function* signInRequest({ email, password }) {
   }
 }
 
-export function* signUpRequest({ name, email, password, navigation }) {
+export function* signUp({ name, email, password, navigation }) {
   try {
     const response = yield call(apiUser.post, 'users', {
       name,
@@ -43,6 +43,6 @@ export function* signUpRequest({ name, email, password, navigation }) {
 }
 
 export default all([
-  takeLatest(AuthTypes.SIGN_IN_REQUEST, signInRequest),
-  takeLatest(AuthTypes.SIGN_UP_REQUEST, signUpRequest),
+  takeLatest(AuthTypes.SIGN_IN_REQUEST, signIn),
+  takeLatest(AuthTypes.SIGN_UP_REQUEST, signUp),
 ]);

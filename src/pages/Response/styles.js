@@ -70,7 +70,7 @@ export const BetterScorePanel = styled.View`
   justify-content: center;
   width: 76px;
   height: 76px;
-  background: ${props => (props.disp ? 'transparent' : '#49b1e9')};
+  background: #49b1e9;
   border-radius: 38px;
   elevation: ${props => (props.disp ? '0' : '5')};
 `;
@@ -86,12 +86,18 @@ export const BetterScoreLabel = styled.Text`
   color: #fff;
 `;
 
-export const AgainButton = styled(RectButton)`
+export const NextButton = styled(RectButton)`
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  background: #0f0;
-  border-radius: 25px;
+  width: 100px;
+  height: 70px;
+  background: ${props => (props.disp ? 'transparent' : '#0d0')};
+  border-radius: 20px;
   elevation: 5;
+`;
+
+export const NextText = styled.Text`
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
 `;

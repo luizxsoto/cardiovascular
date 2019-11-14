@@ -38,10 +38,6 @@ export default function SignIn({ navigation }) {
     }
   }
 
-  function handleSignUp() {
-    navigation.navigate('SignUp');
-  }
-
   return (
     <Container>
       <BackBtn onPress={() => navigation.goBack()}>
@@ -71,11 +67,8 @@ export default function SignIn({ navigation }) {
         />
       </Panel>
       <Panel>
-        <SignBtn onPress={handleSignIn}>
-          <SignBtnText>Entrar</SignBtnText>
-        </SignBtn>
-        <SignBtn background="#fff" onPress={handleSignUp}>
-          <SignBtnText color="rgba(255, 0, 0, 0.7)">Cadastrar</SignBtnText>
+        <SignBtn background="#fff" onPress={handleSignIn}>
+          <SignBtnText color="rgba(255, 0, 0, 0.7)">Entrar</SignBtnText>
         </SignBtn>
       </Panel>
     </Container>

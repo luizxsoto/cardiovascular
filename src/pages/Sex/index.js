@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Creators as UserCreators } from '~/store/ducks/user';
 
 import {
@@ -22,6 +22,7 @@ import feminino from '~/assets/images/feminino.png';
 
 export default function Sex({ navigation }) {
   const dispatch = useDispatch();
+  const name = useSelector(state => state.user.user.name);
   const [gender, setGender] = useState();
   const [attention, setAttention] = useState(true);
 
@@ -36,7 +37,7 @@ export default function Sex({ navigation }) {
       {attention && (
         <Attention>
           <AttentionImage />
-          <AttentionTitle>Olá, Usuário!</AttentionTitle>
+          <AttentionTitle>Olá, {name.split(' ', 1)[0]}!</AttentionTitle>
           <AttentionMessage>
             Nas próximas telas iremos fazer um avaliação da sua saúde
             cadiovascular. Teremos três tipos de perguntas:

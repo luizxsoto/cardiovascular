@@ -34,7 +34,9 @@ export const AttentionImage = styled.Image.attrs({
   height: 150px;
 `;
 
-export const AttentionTitle = styled.Text`
+export const AttentionTitle = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   color: #fff;
   font-size: 24px;
 `;

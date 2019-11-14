@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Alert } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Creators as UserCreators } from '~/store/ducks/user';
 
 import normal from '~/assets/images/normal.png';
@@ -25,12 +25,13 @@ import {
 
 export default function CholGlucPress({ navigation }) {
   const dispatch = useDispatch();
+  const name = useSelector(state => state.user.user.name);
   const diastolicRef = useRef();
   const [attention, setAttention] = useState(true);
   const [cholesterol, setCholesterol] = useState(-1);
   const [gluc, setGluc] = useState(-1);
-  const [systolic, setSystolic] = useState(null);
-  const [diastolic, setDiastolic] = useState(null);
+  const [systolic, setSystolic] = useState('12');
+  const [diastolic, setDiastolic] = useState('8');
 
   function onChangedSystolic(text) {
     const tempText = text.replace(/[^0-9]/g, '');
@@ -80,7 +81,7 @@ export default function CholGlucPress({ navigation }) {
       {attention && (
         <Attention>
           <AttentionImage />
-          <AttentionTitle>Atenção, Usuario!</AttentionTitle>
+          <AttentionTitle>Atenção, {name.split(' ', 1)[0]}!</AttentionTitle>
           <AttentionMessage>
             As repostas a seguir exigem que você tenha embaseamento clínico
             realizado por exames periódicos e com avaliação médica. Informações
@@ -129,7 +130,7 @@ export default function CholGlucPress({ navigation }) {
           value={systolic}
           returnKeyType="next"
           onSubmitEditing={() => diastolicRef.current.focus()}
-          onChangeText={onChangedSystolic}
+          onChangeText={text => onChangedSystolic(text)}
         />
         <PanelText>/</PanelText>
         <PanelInput
@@ -139,7 +140,7 @@ export default function CholGlucPress({ navigation }) {
           value={diastolic}
           returnKeyType="send"
           onSubmitEditing={() => handleSubmit()}
-          onChangeText={onChangedDiastolic}
+          onChangeText={text => onChangedDiastolic(text)}
         />
       </Panel>
       <SendButton onPress={() => handleSubmit()}>

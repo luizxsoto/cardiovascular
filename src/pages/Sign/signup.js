@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Alert } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { Creators as AuthCreators } from '~/store/ducks/auth';
@@ -21,17 +21,22 @@ export default function SignUp({ navigation }) {
   const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [name, setName] = useState();
+  const [name, setName] = useState(useSelector(state => state.user.user.name));
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   function handleSignUp() {
-    if (name && email && password) {
+    if (
+      name &&
+      email &&
+      password &&
+      useSelector(state => state.user.user.name)
+    ) {
       dispatch(AuthCreators.signUpRequest(name, email, password, navigation));
     } else {
       Alert.alert(
         'Preencha todos campos',
-        'É necessário o preenchimento de todos campos para finalizar o cadastro',
+        'É necessário o preenchimento de todos campos para finalizar o cadastro e ter realizado o teste previamente',
         [{ text: 'OK' }],
         {
           cancelable: false,
@@ -79,6 +84,9 @@ export default function SignUp({ navigation }) {
       <Panel>
         <SignBtn background="#fff" onPress={handleSignUp}>
           <SignBtnText color="rgba(255, 0, 0, 0.7)">Cadastrar</SignBtnText>
+        </SignBtn>
+        <SignBtn onPress={() => navigation.navigate('SignIn')}>
+          <SignBtnText>Ja pussuo conta</SignBtnText>
         </SignBtn>
       </Panel>
     </Container>

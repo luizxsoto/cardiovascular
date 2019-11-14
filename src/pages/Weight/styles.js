@@ -56,7 +56,7 @@ export const PanelInput = styled.TextInput.attrs({
   background: rgba(0, 0, 0, 0.2);
   color: #fff;
   border-radius: 5px;
-  font-size: 32px;
+  font-size: 40px;
   padding: 0;
   margin: 0;
   font-family: Calculator;
