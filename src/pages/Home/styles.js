@@ -1,10 +1,16 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import imageBackground from '~/assets/images/mesaMedico.jpg';
 
-export const Container = styled.View`
+export const Container = styled.ImageBackground.attrs({
+  imageStyle: { opacity: 0.1 },
+  source: imageBackground,
+  blurRadius: 0.5,
+})`
   flex: 1;
   align-items: center;
   justify-content: flex-start;
+  background: #eee;
 `;
 
 export const BestScore = styled.View`
@@ -69,7 +75,6 @@ export const ListQuiz = styled.FlatList.attrs({
 })`
   width: 100%;
   padding: 10px;
-  background: #eee;
 `;
 
 export const ItemQuiz = styled(RectButton)`

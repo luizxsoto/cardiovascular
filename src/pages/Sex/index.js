@@ -59,12 +59,12 @@ export default function Sex({ navigation }) {
       <Panel>
         <PanelBtn checked={gender === 1} onPress={() => handleSubmit(1)}>
           <PanelImage source={feminino} />
-          {/* <PanelText>F</PanelText> */}
+          <PanelText>F</PanelText>
         </PanelBtn>
         <PanelText color>/</PanelText>
         <PanelBtn checked={gender === 2} onPress={() => handleSubmit(2)}>
           <PanelImage source={masculino} />
-          {/* <PanelText>M</PanelText> */}
+          <PanelText>M</PanelText>
         </PanelBtn>
       </Panel>
     </Container>

@@ -55,9 +55,11 @@ export default function Quiz() {
           </ResponseText>
           <ResponseText>Glicose: {formatGlucChol(quiz.gluc)}</ResponseText>
           <ResponseText>Fuma: {quiz.smoke ? 'Sim' : 'Não'}</ResponseText>
-          <ResponseText>Bebe álcool: {quiz.alco ? 'Sim' : 'Não'}</ResponseText>
           <ResponseText>
-            Se exercita: {quiz.active ? 'Sim' : 'Não'}
+            Consome álcool: {quiz.alco ? 'Sim' : 'Não'}
+          </ResponseText>
+          <ResponseText>
+            Pratica exercícios: {quiz.active ? 'Sim' : 'Não'}
           </ResponseText>
         </PanelSeparator>
       </ResponsesPanel>

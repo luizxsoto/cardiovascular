@@ -44,7 +44,7 @@ export default function SmokeAlcoActive({ navigation }) {
   return (
     <Container>
       <QuestionText>
-        {signed ? 'Novos costumes' : 'Tem costume de'}:
+        {signed ? 'Tem novos costumes' : 'Tem costume'} de:
       </QuestionText>
       <Panel>
         <PanelBtn checked={smoke === 0} onPress={() => setSmoke(0)}>
@@ -59,7 +59,7 @@ export default function SmokeAlcoActive({ navigation }) {
         <PanelBtn checked={alco === 0} onPress={() => setAlco(0)}>
           <PanelImage source={naoBebe} />
         </PanelBtn>
-        <PanelText>BEBER ÁLCOOL ?</PanelText>
+        <PanelText>CONSUMIR ÁLCOOL ?</PanelText>
         <PanelBtn checked={alco === 1} onPress={() => setAlco(1)}>
           <PanelImage source={bebe} />
         </PanelBtn>
@@ -68,7 +68,7 @@ export default function SmokeAlcoActive({ navigation }) {
         <PanelBtn checked={active === 0} onPress={() => setActive(0)}>
           <PanelImage source={naoExercita} />
         </PanelBtn>
-        <PanelText>SE EXERCITAR?</PanelText>
+        <PanelText>PRATICAR EXERCÍCIOS?</PanelText>
         <PanelBtn checked={active === 1} onPress={() => setActive(1)}>
           <PanelImage source={exercita} />
         </PanelBtn>
