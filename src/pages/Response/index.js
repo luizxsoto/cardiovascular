@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Alert } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { apiApp } from '~/services/api';
+import { Creators as AuthCreators } from '~/store/ducks/auth';
+import { Creators as UserCreators } from '~/store/ducks/user';
 
+import LoadingGif from '~/components/LoadingGif';
 import {
   Container,
+  BackBtn,
   ScoreTitle,
   ScorePanel,
   ScorePoints,
@@ -23,8 +25,11 @@ import {
 } from './styles';
 
 export default function Response({ navigation }) {
-  const [score, setScore] = useState('...');
+  const dispatch = useDispatch();
+  const signed = useSelector(state => state.auth.signed);
   const user = useSelector(state => state.user);
+  const score = useSelector(state => state.user.score);
+  const loading = useSelector(state => state.user.loading);
   const [title, setTitle] = useState('Carregando...');
   const [message, setMessage] = useState('Carregando...');
 
@@ -56,11 +61,57 @@ export default function Response({ navigation }) {
     },
   ];
 
+  function handleRestart() {
+    if (signed) {
+      navigation.navigate('Height');
+    } else {
+      dispatch(AuthCreators.signOut());
+      dispatch(UserCreators.clearUser());
+      navigation.navigate('Sign');
+    }
+  }
+
+  function callApiUser() {
+    dispatch(
+      UserCreators.saveQuizRequest(
+        user.user.idade,
+        user.user.sexo,
+        user.height,
+        user.weight,
+        user.systolic,
+        user.diastolic,
+        user.cholesterol,
+        user.gluc,
+        user.smoke,
+        user.alco,
+        user.active,
+        user.score
+      )
+    );
+    navigation.navigate('Home');
+  }
+
   useEffect(() => {
-    async function callApi() {
-      await apiApp
-        .post('/predict', {
-          features: [
+    function callApiApp() {
+      if (signed) {
+        dispatch(
+          UserCreators.sendQuizRequest(
+            user.user.idade,
+            user.user.sexo,
+            user.height,
+            user.weight,
+            user.systolic,
+            user.diastolic,
+            user.cholesterol,
+            user.gluc,
+            user.smoke,
+            user.alco,
+            user.active
+          )
+        );
+      } else {
+        dispatch(
+          UserCreators.sendQuizRequest(
             user.age,
             user.gender,
             user.height,
@@ -71,14 +122,13 @@ export default function Response({ navigation }) {
             user.gluc,
             user.smoke,
             user.alco,
-            user.active,
-          ],
-        })
-        .then(res => setScore(parseInt(res.data.probability[0][0] * 100, 10)))
-        .catch(err => Alert.alert('Erro', `${err}`));
+            user.active
+          )
+        );
+      }
     }
 
-    callApi();
+    callApiApp();
   }, []);
 
   useEffect(() => {
@@ -104,30 +154,51 @@ export default function Response({ navigation }) {
   }, [score]);
 
   return (
-    <Container>
-      <ScoreTitle>Seu score é:</ScoreTitle>
-      <ScorePanel>
-        <ScorePoints>{score}</ScorePoints>
-        <ScoreLabel>pts</ScoreLabel>
-      </ScorePanel>
-      <ScoreMessageTitle>{title}</ScoreMessageTitle>
-      <ScoreMessage>{message}</ScoreMessage>
-      <AdviceMessage>Algo está atrapalhando seu score!</AdviceMessage>
-      <AdviceMessage>Se você o evitasse, seu score seria de:</AdviceMessage>
-      <RowPanel>
-        <NextButton disp />
-        <BetterScorePanel>
-          <BetterScorePoints>100</BetterScorePoints>
-          <BetterScoreLabel>pts</BetterScoreLabel>
-        </BetterScorePanel>
-        <NextButton onPress={() => navigation.navigate('SignUp')}>
-          <NextText>Saiba mais sobre seu SCORE!</NextText>
-        </NextButton>
-      </RowPanel>
-    </Container>
+    <>
+      {loading ? (
+        <LoadingGif />
+      ) : (
+        <Container>
+          <BackBtn onPress={() => handleRestart()}>
+            <Icon name="reload" size={40} color="#f95f62" />
+          </BackBtn>
+          <ScoreTitle>Seu score é:</ScoreTitle>
+          <ScorePanel>
+            <ScorePoints>{score || '...'}</ScorePoints>
+            <ScoreLabel>pts</ScoreLabel>
+          </ScorePanel>
+          <ScoreMessageTitle>{title}</ScoreMessageTitle>
+          <ScoreMessage>{message}</ScoreMessage>
+          {score !== '...' && (
+            <>
+              <AdviceMessage>Algo está atrapalhando seu score!</AdviceMessage>
+              <AdviceMessage>
+                Se você o evitasse, seu score seria de:
+              </AdviceMessage>
+              <RowPanel>
+                <NextButton disp />
+                <BetterScorePanel>
+                  <BetterScorePoints>100</BetterScorePoints>
+                  <BetterScoreLabel>pts</BetterScoreLabel>
+                </BetterScorePanel>
+                {signed ? (
+                  <NextButton onPress={() => callApiUser()}>
+                    <NextText>Enviar e voltar para HOME!</NextText>
+                  </NextButton>
+                ) : (
+                  <NextButton onPress={() => navigation.navigate('SignUp')}>
+                    <NextText>Saiba mais sobre seu SCORE!</NextText>
+                  </NextButton>
+                )}
+              </RowPanel>
+            </>
+          )}
+        </Container>
+      )}
+    </>
   );
 }
 
 Response.navigationOptions = {
-  title: 'Seu resultado',
+  header: null,
 };

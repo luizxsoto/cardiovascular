@@ -58,10 +58,10 @@ export const AttentionButton = styled(RectButton)`
 `;
 
 export const QuestionText = styled.Text`
-  width: 90%;
-  height: 40px;
+  width: 100%;
+  height: 30px;
   text-align: center;
-  font-size: 24px;
+  font-size: 22px;
   color: #f95f62;
   font-weight: bold;
   background: rgba(0, 0, 0, 0.1);
@@ -84,7 +84,7 @@ export const PanelBtn = styled(RectButton)`
   align-items: center;
   justify-content: flex-start;
   width: 30%;
-  height: 100px;
+  height: 90px;
   padding: 10px 0;
   background: ${props =>
     props.checked ? 'rgba(0, 0, 0, 0.7)' : 'rgba(255, 255, 255, 0.9)'};
@@ -105,8 +105,8 @@ export const PanelText = styled.Text`
 export const PanelInput = styled.TextInput.attrs({
   keyboardType: 'numeric',
 })`
-  width: 20%;
-  height: 50px;
+  width: 60px;
+  height: 40px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
   font-size: 32px;
@@ -119,7 +119,7 @@ export const SendButton = styled(RectButton).attrs({})`
   align-items: center;
   justify-content: center;
   width: 200px;
-  height: 70px;
+  height: 60px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 `;
@@ -127,6 +127,7 @@ export const SendButton = styled(RectButton).attrs({})`
 export const SendText = styled.Text`
   width: 100%;
   font-size: 28px;
-  color: #fff;
+  color: #f95f62;
+  font-weight: bold;
   text-align: center;
 `;

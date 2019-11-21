@@ -71,8 +71,8 @@ export const SendButton = styled(RectButton).attrs({})`
   align-items: center;
   justify-content: center;
   width: 200px;
-  height: 70px;
-  background: rgba(0, 0, 0, 0.1);
+  height: 60px;
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 `;
 

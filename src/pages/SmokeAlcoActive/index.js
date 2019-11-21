@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Creators as UserCreators } from '~/store/ducks/user';
 
 import fuma from '~/assets/images/fuma.png';
@@ -21,6 +21,7 @@ import {
 } from './styles';
 
 export default function SmokeAlcoActive({ navigation }) {
+  const signed = useSelector(state => state.auth.signed);
   const [smoke, setSmoke] = useState(-1);
   const [alco, setAlco] = useState(-1);
   const [active, setActive] = useState(-1);
@@ -33,16 +34,18 @@ export default function SmokeAlcoActive({ navigation }) {
         'Selecione ao menos uma resposta para cada pergunta'
       );
     } else {
-      dispatch(UserCreators.changeSmoke(smoke));
-      dispatch(UserCreators.changeAlco(alco));
-      dispatch(UserCreators.changeActive(active));
+      dispatch(UserCreators.changeSmoke(Number(smoke)));
+      dispatch(UserCreators.changeAlco(Number(alco)));
+      dispatch(UserCreators.changeActive(Number(active)));
       navigation.navigate('CholGlucPress');
     }
   }
 
   return (
     <Container>
-      <QuestionText>Tem costume de :</QuestionText>
+      <QuestionText>
+        {signed ? 'Novos costumes' : 'Tem costume de'}:
+      </QuestionText>
       <Panel>
         <PanelBtn checked={smoke === 0} onPress={() => setSmoke(0)}>
           <PanelImage source={naoFuma} />

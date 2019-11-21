@@ -25,7 +25,7 @@ export const BackBtn = styled(RectButton)`
   left: 10;
   width: 40px;
   height: 40px;
-  border-radius: 15px;
+  border-radius: 20px;
 `;
 
 export const Panel = styled.View`
@@ -34,37 +34,33 @@ export const Panel = styled.View`
   justify-content: center;
 `;
 
-export const Label = styled.Text`
-  margin: 10px 0;
-  padding: 0 10px;
-  color: #fff;
-  font-weight: bold;
-`;
-
 export const Input = styled.TextInput.attrs({
   autoCapitalize: 'none',
   autoCorrect: false,
+  placeholderTextColor: 'rgba(255, 255, 255, 0.7)',
 })`
   height: 40px;
   width: 100%;
   font-size: 20px;
   padding: 0 10px;
-  background: rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  color: #fff;
   border-bottom-width: 1px;
-  border-bottom-color: #f00;
+  border-bottom-color: #fff;
 `;
 export const InputName = styled.TextInput.attrs({
   autoCapitalize: 'words',
   returnKeyType: 'send',
   autoCorrect: false,
+  placeholderTextColor: 'rgba(255, 255, 255, 0.7)',
 })`
   height: 40px;
   width: 100%;
   font-size: 20px;
   padding: 0 10px;
-  background: rgba(0, 0, 0, 0.1);
+  color: #fff;
   border-bottom-width: 1px;
-  border-bottom-color: #f00;
+  border-bottom-color: #fff;
 `;
 
 export const LogoImage = styled.Image.attrs({

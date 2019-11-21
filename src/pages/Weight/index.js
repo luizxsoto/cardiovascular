@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Creators as UserCreators } from '~/store/ducks/user';
 
 import {
@@ -15,6 +15,7 @@ import {
 
 export default function Weight({ navigation }) {
   const dispatch = useDispatch();
+  const signed = useSelector(state => state.auth.signed);
   const [weightInput, setWeightInput] = useState();
 
   function onChangeWeight(text) {
@@ -32,7 +33,7 @@ export default function Weight({ navigation }) {
 
   function handleSubmit() {
     if (weightInput >= 40) {
-      dispatch(UserCreators.changeWeight(weightInput));
+      dispatch(UserCreators.changeWeight(Number(weightInput)));
       navigation.navigate('SmokeAlcoActive');
     } else {
       Alert.alert(
@@ -49,7 +50,7 @@ export default function Weight({ navigation }) {
   return (
     <Container>
       <QuestionImage />
-      <QuestionText>Seu peso é:</QuestionText>
+      <QuestionText>Seu {signed && 'novo '}peso é:</QuestionText>
       <Panel>
         <PanelInput
           placeholder="Em kilos"

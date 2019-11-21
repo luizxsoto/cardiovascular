@@ -14,6 +14,17 @@ export const Container = styled.ImageBackground.attrs({
   background: #eee;
 `;
 
+export const BackBtn = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10;
+  left: 10;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+`;
+
 export const ScoreTitle = styled.Text`
   font-size: 20px;
   font-weight: bold;

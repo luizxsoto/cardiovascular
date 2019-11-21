@@ -6,8 +6,23 @@ import produce from 'immer';
 export const { Types, Creators } = createActions({
   signInRequest: ['email', 'password'],
   signInSuccess: ['token'],
-  signUpRequest: ['name', 'email', 'password', 'navigation'],
-  signUpSuccess: [],
+  signUpRequest: [
+    'name',
+    'email',
+    'password',
+    'age',
+    'gender',
+    'height',
+    'weight',
+    'systolic',
+    'diastolic',
+    'cholesterol',
+    'gluc',
+    'smoke',
+    'alco',
+    'active',
+    'score',
+  ],
   signFailure: [],
   signOut: [],
 });
@@ -37,19 +52,18 @@ const signUpRequest = (state = INITIAL_STATE) =>
     draft.loading = true;
   });
 
-const signUpSuccess = (state = INITIAL_STATE) =>
-  produce(state, draft => {
-    draft.loading = false;
-  });
-
 const signFailure = (state = INITIAL_STATE) =>
   produce(state, draft => {
+    draft.token = null;
+    draft.signed = false;
     draft.loading = false;
   });
 
 const signOut = (state = INITIAL_STATE) =>
   produce(state, draft => {
+    draft.token = null;
     draft.signed = false;
+    draft.loading = false;
   });
 
 /* Reducers */
@@ -57,7 +71,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.SIGN_IN_REQUEST]: signInRequest,
   [Types.SIGN_IN_SUCCESS]: signInSuccess,
   [Types.SIGN_UP_REQUEST]: signUpRequest,
-  [Types.SIGN_UP_SUCCESS]: signUpSuccess,
   [Types.SIGN_FAILURE]: signFailure,
   [Types.SIGN_OUT]: signOut,
 });

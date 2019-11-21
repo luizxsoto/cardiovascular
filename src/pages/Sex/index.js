@@ -22,13 +22,13 @@ import feminino from '~/assets/images/feminino.png';
 
 export default function Sex({ navigation }) {
   const dispatch = useDispatch();
-  const name = useSelector(state => state.user.user.name);
+  const user = useSelector(state => state.user);
   const [gender, setGender] = useState();
   const [attention, setAttention] = useState(true);
 
   function handleSubmit(option) {
     setGender(option);
-    dispatch(UserCreators.changeGender(option));
+    dispatch(UserCreators.changeGender(Number(option)));
     navigation.navigate('Birthday');
   }
 
@@ -37,10 +37,12 @@ export default function Sex({ navigation }) {
       {attention && (
         <Attention>
           <AttentionImage />
-          <AttentionTitle>Olá, {name.split(' ', 1)[0]}!</AttentionTitle>
+          <AttentionTitle>
+            Olá, {user.user.name && user.user.name.split(' ', 1)[0]}!
+          </AttentionTitle>
           <AttentionMessage>
-            Nas próximas telas iremos fazer um avaliação da sua saúde
-            cadiovascular. Teremos três tipos de perguntas:
+            Nas próximas telas iremos fazer uma avaliação de sua saúde
+            cardiovascular. Teremos três tipos de perguntas:
           </AttentionMessage>
           <AttentionMessage>Objetivas: Idade e peso</AttentionMessage>
           <AttentionMessage>Subjetivas: Hábitos pessoais</AttentionMessage>
@@ -48,19 +50,21 @@ export default function Sex({ navigation }) {
             Clínicas: Pressão, glicose e colesterol
           </AttentionMessage>
           <AttentionButton onPress={() => setAttention(false)}>
-            <AttentionMessage>Vamos lá?</AttentionMessage>
+            <AttentionMessage>Vamos lá!</AttentionMessage>
           </AttentionButton>
         </Attention>
       )}
       <QuestionImage />
-      <QuestionText>Seu sexo é:</QuestionText>
+      <QuestionText>Seu sexo é?</QuestionText>
       <Panel>
         <PanelBtn checked={gender === 1} onPress={() => handleSubmit(1)}>
           <PanelImage source={feminino} />
+          {/* <PanelText>F</PanelText> */}
         </PanelBtn>
         <PanelText color>/</PanelText>
         <PanelBtn checked={gender === 2} onPress={() => handleSubmit(2)}>
           <PanelImage source={masculino} />
+          {/* <PanelText>M</PanelText> */}
         </PanelBtn>
       </Panel>
     </Container>

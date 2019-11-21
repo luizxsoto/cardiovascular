@@ -25,7 +25,8 @@ import {
 
 export default function CholGlucPress({ navigation }) {
   const dispatch = useDispatch();
-  const name = useSelector(state => state.user.user.name);
+  const signed = useSelector(state => state.auth.signed);
+  const user = useSelector(state => state.user);
   const diastolicRef = useRef();
   const [attention, setAttention] = useState(true);
   const [cholesterol, setCholesterol] = useState(-1);
@@ -63,10 +64,10 @@ export default function CholGlucPress({ navigation }) {
 
   function handleSubmit() {
     if (cholesterol > 0 && gluc > 0 && systolic && diastolic) {
-      dispatch(UserCreators.changeCholesterol(cholesterol));
-      dispatch(UserCreators.changeGluc(gluc));
-      dispatch(UserCreators.changeSystolic(systolic * 10));
-      dispatch(UserCreators.changeDiastolic(diastolic * 10));
+      dispatch(UserCreators.changeCholesterol(Number(cholesterol)));
+      dispatch(UserCreators.changeGluc(Number(gluc)));
+      dispatch(UserCreators.changeSystolic(Number(systolic * 10)));
+      dispatch(UserCreators.changeDiastolic(Number(diastolic * 10)));
       navigation.navigate('Response');
     } else {
       Alert.alert(
@@ -81,7 +82,9 @@ export default function CholGlucPress({ navigation }) {
       {attention && (
         <Attention>
           <AttentionImage />
-          <AttentionTitle>Atenção, {name.split(' ', 1)[0]}!</AttentionTitle>
+          <AttentionTitle>
+            Atenção, {user.user.name && user.user.name.split(' ', 1)[0]}!
+          </AttentionTitle>
           <AttentionMessage>
             As repostas a seguir exigem que você tenha embaseamento clínico
             realizado por exames periódicos e com avaliação médica. Informações
@@ -92,7 +95,7 @@ export default function CholGlucPress({ navigation }) {
           </AttentionButton>
         </Attention>
       )}
-      <QuestionText>Como está seu colesterol?</QuestionText>
+      <QuestionText>Como está seu {signed && 'novo '}colesterol?</QuestionText>
       <Panel>
         <PanelBtn checked={cholesterol === 1} onPress={() => setCholesterol(1)}>
           <PanelImage source={normal} />
@@ -107,7 +110,7 @@ export default function CholGlucPress({ navigation }) {
           <PanelText checked={cholesterol === 3}>Bem acima do normal</PanelText>
         </PanelBtn>
       </Panel>
-      <QuestionText>Como está sua glicose?</QuestionText>
+      <QuestionText>Como está sua {signed && 'nova '}glicose?</QuestionText>
       <Panel>
         <PanelBtn checked={gluc === 1} onPress={() => setGluc(1)}>
           <PanelImage source={normal} />
@@ -122,7 +125,7 @@ export default function CholGlucPress({ navigation }) {
           <PanelText checked={gluc === 3}>Bem acima do normal</PanelText>
         </PanelBtn>
       </Panel>
-      <QuestionText>Como está sua pressão?</QuestionText>
+      <QuestionText>Como está sua {signed && 'nova '}pressão?</QuestionText>
       <Panel align>
         <PanelInput
           placeholder="'12'"

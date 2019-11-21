@@ -14,6 +14,7 @@ import Weight from './pages/Weight';
 import SmokeAlcoActive from './pages/SmokeAlcoActive';
 import CholGlucPress from './pages/CholGlucPress';
 import Response from './pages/Response';
+import Quiz from './pages/Quiz';
 
 import cardiogram from '~/assets/images/cardiogram.png';
 
@@ -52,8 +53,31 @@ export default (isSigned = false) =>
           }
         ),
         On: createStackNavigator(
-          { Home },
-          { defaultNavigationOptions: { header: null } }
+          {
+            Home,
+            Quiz,
+            Height,
+            Weight,
+            SmokeAlcoActive,
+            CholGlucPress,
+            Response,
+          },
+          {
+            headerLayoutPreset: 'center',
+            headerBackTitleVisible: false,
+            defaultNavigationOptions: {
+              headerStyle: {
+                backgroundColor: '#49b1e9',
+              },
+              headerTintColor: '#fff',
+              headerRight: (
+                <Image
+                  source={cardiogram}
+                  style={{ height: 32, width: 32, marginRight: 10 }}
+                />
+              ),
+            },
+          }
         ),
       },
       {

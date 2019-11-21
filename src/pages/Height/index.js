@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Creators as UserCreators } from '~/store/ducks/user';
 
 import {
@@ -15,6 +15,7 @@ import {
 
 export default function Height({ navigation }) {
   const dispatch = useDispatch();
+  const signed = useSelector(state => state.auth.signed);
   const [heightInput, setHeightInput] = useState();
 
   function onChangeHeight(text) {
@@ -32,7 +33,7 @@ export default function Height({ navigation }) {
 
   function handleSubmit() {
     if (heightInput >= 100) {
-      dispatch(UserCreators.changeHeight(heightInput));
+      dispatch(UserCreators.changeHeight(Number(heightInput)));
       navigation.navigate('Weight');
     } else {
       Alert.alert(
@@ -49,7 +50,7 @@ export default function Height({ navigation }) {
   return (
     <Container>
       <QuestionImage />
-      <QuestionText>Sua altura é:</QuestionText>
+      <QuestionText>Sua {signed && 'nova '}altura é?</QuestionText>
       <Panel>
         <PanelInput
           placeholder="Em centimetros"

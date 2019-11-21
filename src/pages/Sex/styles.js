@@ -85,7 +85,7 @@ export const Panel = styled.View`
   align-items: center;
   justify-content: space-between;
   width: 90%;
-  height: 100px;
+  height: 130px;
   padding: 0 20px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
@@ -95,8 +95,8 @@ export const PanelBtn = styled(RectButton).attrs({})`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 20%;
-  height: 70%;
+  width: 60px;
+  height: 100px;
   margin: 10px;
   background: ${props =>
     props.checked ? 'rgba(0, 0, 0, 0.7)' : 'rgba(0, 0, 0, 0.2)'};
